@@ -1,0 +1,97 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* ..........left side design start.......... */
+
+.main-left {
+  background-color: rgb(235, 234, 234);
+  height: 100%;
+}
+
+.update-hazard-header-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(199, 207, 207);
+  height: 20%;
+  width: 100%;
+  border-bottom-right-radius: 200px;
+  margin-left: -5%;
+  margin-bottom: 3%;
+}
+
+.update-hazard-title {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bolder;
+  margin-left: 5%;
+  color: #e4f2e7;
+  
+}
+
+.update-hazard-main-input-box{
+  background-color: #787a7c;
+  height: 70%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.update-hazard-input-box {
+  background-color: rgb(244, 251, 255);
+  height: 12%;
+  width: 90%;
+  margin-top: 2%;
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+
+/* ..........right side design start.......... */
+.main-right {
+  background-color: #787a7c;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-main-space {
+ 
+  height: 20%;
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.right-button-main-box{
+  background-color: #e4f2e7;
+  height: 70%;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Update-hazard-button-box1 {
+  background-color: rgb(126, 113, 113);
+  height: 15%;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.Update-hazard-button-box2 {
+  background-color: rgb(126, 113, 113);
+  height: 15%;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
