@@ -10,7 +10,7 @@ const HazardSchema = new Schema(
         hazardType: {
             type: String,
             required: true,
-            enum: ['Elephant', 'Bull', 'Potential Hazard', 'Others'] // corrected 'Potancial Hazard' to 'Potential Hazard'
+            enum: ['Elephant', 'Bull', 'Landslide'] // corrected 'Potancial Hazard' to 'Potential Hazard'
         },
         time: {
             type: Date,
