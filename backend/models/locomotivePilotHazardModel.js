@@ -1,7 +1,7 @@
 // locomotivePilotHazardModel.js
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const LocomotivePilot = require('./locomotivePilotModel');
+// const LocomotivePilot = require('./locomotivePilotModel');
 
 // Define the schema for locomotive pilot hazard
 const locomotivePilotHazardSchema = new mongoose.Schema({
@@ -24,7 +24,7 @@ const locomotivePilotHazardSchema = new mongoose.Schema({
     typeOfHazard: {
         type: String,
         required: true,
-        enum: ['Elephant', 'Bull', 'Potential Hazard', 'Others'] // corrected 'Potancial Hazard' to 'Potential Hazard'
+        enum: ['Elephant', 'Bull', 'Landslide'] // corrected 'Potancial Hazard' to 'Potential Hazard'
         
     },
     Time: {
