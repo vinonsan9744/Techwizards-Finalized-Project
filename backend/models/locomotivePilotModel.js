@@ -25,7 +25,9 @@ const locomotivePilotSchema = new mongoose.Schema({
     },
     locomotiveName: {
         type: String,
+
         required: true,
+
     },
     locomotiveEmail: {
         type: String,
@@ -49,8 +51,10 @@ const locomotivePilotSchema = new mongoose.Schema({
             },
             message: 'Phone number must start with "07"'
         },
+
         minlength: 10,
         maxlength: 12
+
     }
 }, {
     timestamps: true
