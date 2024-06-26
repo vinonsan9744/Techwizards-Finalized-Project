@@ -12,4 +12,15 @@ const createTask = async(req,res)=>{
 
 };
 
-module.exports={createTask};
+// to get all -task GET
+const getTasks = async (req,res) => {
+    try{
+    const locomotivePilot = await locomotivePilotModel.find({});
+    res.status(200).json(locomotivePilot);
+    } catch (e){
+        res.status(400).jeson({ error:e.message});
+    }
+};
+
+
+module.exports={createTask,getTasks};
