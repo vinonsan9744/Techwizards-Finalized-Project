@@ -16,7 +16,7 @@ const HazardSchema = new Schema(
             type: Date,
             default: Date.now
         },
-        location: {
+        hazardLocation: {
             type: String,
             required: true,
             // enum: ['jaffna'] // need to change if there are predefined locations
@@ -30,6 +30,24 @@ const HazardSchema = new Schema(
         timestamps: true
     }
 );
+
+// Pre-save hook to validate uniqueness of hazardType and hazardLocation
+HazardSchema.pre('save', async function(next) {
+    try {
+        const existingHazard = await this.constructor.findOne({
+            hazardType: this.hazardType,
+            hazardLocation: this.hazardLocation
+        });
+
+        if (existingHazard) {
+            throw new Error(`Hazard of type ${this.hazardType} already exists for location ${this.hazardLocation}`);
+        }
+
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 // Pre-save hook to customize hazard ID generation
 HazardSchema.pre('save', function(next) {
