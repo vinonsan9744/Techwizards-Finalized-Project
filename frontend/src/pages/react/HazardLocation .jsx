@@ -9,7 +9,62 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 
 function HazardLocation() {
-  
+
+  const [locationTypes, setLocationTypes] = useState([]);
+  const [selectedLocationType, setSelectedLocationType] = useState('');
+  const [locationNames, setLocationNames] = useState([]);
+  const [selectedLocationName, setSelectedLocationName] = useState('');
+  const [locationHazards, setLocationHazards] = useState([]);
+
+  // Fetch location types on component mount
+  useEffect(() => {
+    const fetchLocationTypes = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/location');
+        const uniqueTypes = [...new Set(response.data.map(location => location.locationType))];
+        setLocationTypes(uniqueTypes);
+      } catch (error) {
+        console.error('Error fetching location types:', error);
+      }
+    };
+
+    fetchLocationTypes();
+  }, []);
+
+  // Fetch location names based on selected location type
+  useEffect(() => {
+    const fetchLocationNames = async () => {
+      try {
+        if (selectedLocationType) {
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
+          const filteredNames = response.data
+            .filter(location => location.locationType === selectedLocationType)
+            .map(location => location.locationName);
+          setLocationNames(filteredNames);
+        }
+      } catch (error) {
+        console.error('Error fetching location names:', error);
+      }
+    };
+
+    fetchLocationNames();
+  }, [selectedLocationType]);
+
+  // Handle selection of location type
+  const handleLocationTypeSelect = (type) => {
+    setSelectedLocationType(type);
+    setSelectedLocationName(''); // Reset selected location name when location type changes
+    setLocationNames([]); // Clear previous location names
+    setLocationHazards([]); // Clear previous location hazards
+  };
+
+  // Handle selection of location name
+  const handleLocationNameSelect = (name) => {
+    setSelectedLocationName(name);
+  };
+
+
+
 
   return (
     <>
@@ -34,7 +89,7 @@ function HazardLocation() {
 
                   <DropdownButton
                     variant="outline-secondary"
-                    title="Location Route"
+                    title="Location Type"
                     id="hazard-location-input-group-dropdown-2"
                     align="end"
                     className="hazard-location-dropdown-box-button"
@@ -50,7 +105,7 @@ function HazardLocation() {
             </div>
 
             <div className="hazard-location-button-box1 container-flex vh-30">
-              <Button className="hazard-location-search-button">Search</Button>
+              <Button className="hazard-location-search-button" onClick={handleSearch}>Search</Button>
             </div>
 
             <div className="hazard-location-button-box2 container-flex vh-30">
@@ -61,7 +116,7 @@ function HazardLocation() {
           {/* Right side box */}
           <div className="hazard-location-main-right col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="hazard-location-location-box container-flex vh-30">
-              <h1 className="hazard-location-heading">Kekkirawa</h1>
+              <h1 className="hazard-location-heading">{selectedLocationName}</h1>
             </div>
 
             <div className="hazard-location-possible-main-box container-flex vh-30">
@@ -70,21 +125,17 @@ function HazardLocation() {
                   <h2 className="hazard-location-possible-header-heading">Possible Hazards</h2>
                 </div>
 
-                <div className="hazard-location-possible-content-box1 container-flex">
-                  <h2 className="hazard-location-possible-content-heading">Bull</h2>
-                </div>
-
-                <div className="hazard-location-possible-content-box1 container-flex">
-                  <h2 className="hazard-location-possible-content-heading">Elephant</h2>
-                </div>
-
-                <div className="hazard-location-possible-content-box1 container-flex">
-                  <h2 className="hazard-location-possible-content-heading">Landslide</h2>
-                </div>
-
-                <div className="hazard-location-possible-content-box1 container-flex">
-                  <h2 className="hazard-location-possible-content-heading">Other</h2>
-                </div>
+                {locationHazards.length > 0 ? (
+                  locationHazards.map((hazard, index) => (
+                    <div key={index} className="hazard-location-possible-content-box1 container-flex">
+                      <h2 className="hazard-location-possible-content-heading">{hazard.hazardType}</h2>
+                    </div>
+                  ))
+                ) : (
+                  <div className="hazard-location-possible-content-box1 container-flex">
+                    <h2 className="hazard-location-possible-content-heading">No hazards found for this location.</h2>
+                  </div>
+                )}
               </div>
             </div>
           </div>

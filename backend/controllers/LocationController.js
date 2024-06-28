@@ -21,4 +21,5 @@ const getTasks = async (req,res) => {
         res.status(400).jeson({ error:e.message});
     }
 };
+
 module.exports={createTask,getTasks};
