@@ -12,4 +12,13 @@ const createTask = async(req,res)=>{
 
 };
 
-module.exports={createTask};
+// to create a Get method to all
+const getTasks = async (req,res) => {
+    try{
+    const Location = await LocationModel.find({});
+    res.status(200).json(Location);
+    } catch (e){
+        res.status(400).jeson({ error:e.message});
+    }
+};
+module.exports={createTask,getTasks};
