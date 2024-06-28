@@ -33,8 +33,8 @@ function HazardLocation() {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
-          const response = await axios.get(`http://localhost:4000/api/location/${selectedLocationType}/names`);
-          setLocationNames(response.data);
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
+          setLocationNames(response.data.map(location => location.locationName));
         }
       } catch (error) {
         console.error('Error fetching location names:', error);
@@ -48,6 +48,7 @@ function HazardLocation() {
   const handleLocationTypeSelect = (type) => {
     setSelectedLocationType(type);
     setSelectedLocationName(''); // Reset selected location name when location type changes
+    setLocationNames([]); // Clear previous location names
   };
 
   // Handle selection of location name
