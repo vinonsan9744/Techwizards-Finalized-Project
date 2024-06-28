@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import "./../style/HazardLocation .css";
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import axios from 'axios';
+
 
 function HazardLocation() {
+
   const [locationTypes, setLocationTypes] = useState([]);
   const [selectedLocationType, setSelectedLocationType] = useState('');
   const [locationNames, setLocationNames] = useState([]);
@@ -61,17 +63,8 @@ function HazardLocation() {
     setSelectedLocationName(name);
   };
 
-  // Fetch hazards for selected location on search button click
-  const handleSearch = async () => {
-    try {
-      if (selectedLocationName) {
-        const response = await axios.get(`http://localhost:4000/api/hazard?locationName=${selectedLocationName}`);
-        setLocationHazards(response.data); // Assuming the API returns an array of hazards
-      }
-    } catch (error) {
-      console.error('Error fetching location hazards:', error);
-    }
-  };
+
+
 
   return (
     <>
@@ -90,7 +83,7 @@ function HazardLocation() {
                   <Form.Control
                     aria-label="Text input with dropdown button"
                     id="hazard-location-input"
-                    value={selectedLocationType}
+                    
                     readOnly
                   />
 
@@ -101,33 +94,13 @@ function HazardLocation() {
                     align="end"
                     className="hazard-location-dropdown-box-button"
                   >
-                    {locationTypes.map((type, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
-                    ))}
+                   
                   </DropdownButton>
                 </InputGroup>
 
-                {/* Dropdown for location names */}
-                <InputGroup className="hazard-location-input-dropdown-box">
-                  <Form.Control
-                    aria-label="Text input with dropdown button"
-                    id="hazard-location-input"
-                    value={selectedLocationName}
-                    readOnly
-                  />
+                
 
-                  <DropdownButton
-                    variant="outline-secondary"
-                    title="Location Name"
-                    id="hazard-location-input-group-dropdown-2"
-                    align="end"
-                    className="hazard-location-dropdown-box-button"
-                  >
-                    {locationNames.map((name, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
-                    ))}
-                  </DropdownButton>
-                </InputGroup>
+                
               </div>
             </div>
 
