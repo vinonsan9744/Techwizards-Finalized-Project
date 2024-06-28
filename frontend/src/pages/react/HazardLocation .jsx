@@ -1,60 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import "./../style/HazardLocation .css";
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import axios from 'axios';
+
 
 function HazardLocation() {
-  const [locationTypes, setLocationTypes] = useState([]);
-  const [selectedLocationType, setSelectedLocationType] = useState('');
-  const [locationNames, setLocationNames] = useState([]);
-  const [selectedLocationName, setSelectedLocationName] = useState('');
-
-  // Fetch location types on component mount
-  useEffect(() => {
-    const fetchLocationTypes = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/api/location');
-        const uniqueTypes = [...new Set(response.data.map(location => location.locationType))];
-        setLocationTypes(uniqueTypes);
-      } catch (error) {
-        console.error('Error fetching location types:', error);
-      }
-    };
-
-    fetchLocationTypes();
-  }, []);
-
-  // Fetch location names based on selected location type
-  useEffect(() => {
-    const fetchLocationNames = async () => {
-      try {
-        if (selectedLocationType) {
-          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
-          setLocationNames(response.data.map(location => location.locationName));
-        }
-      } catch (error) {
-        console.error('Error fetching location names:', error);
-      }
-    };
-
-    fetchLocationNames();
-  }, [selectedLocationType]);
-
-  // Handle selection of location type
-  const handleLocationTypeSelect = (type) => {
-    setSelectedLocationType(type);
-    setSelectedLocationName(''); // Reset selected location name when location type changes
-    setLocationNames([]); // Clear previous location names
-  };
-
-  // Handle selection of location name
-  const handleLocationNameSelect = (name) => {
-    setSelectedLocationName(name);
-  };
+  
 
   return (
     <>
@@ -73,7 +28,7 @@ function HazardLocation() {
                   <Form.Control
                     aria-label="Text input with dropdown button"
                     id="hazard-location-input"
-                    value={selectedLocationType}
+                    
                     readOnly
                   />
 
@@ -84,33 +39,13 @@ function HazardLocation() {
                     align="end"
                     className="hazard-location-dropdown-box-button"
                   >
-                    {locationTypes.map((type, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
-                    ))}
+                   
                   </DropdownButton>
                 </InputGroup>
 
-                {/* Dropdown for location names */}
-                <InputGroup className="hazard-location-input-dropdown-box">
-                  <Form.Control
-                    aria-label="Text input with dropdown button"
-                    id="hazard-location-input"
-                    value={selectedLocationName}
-                    readOnly
-                  />
+                
 
-                  <DropdownButton
-                    variant="outline-secondary"
-                    title="Location Name"
-                    id="hazard-location-input-group-dropdown-2"
-                    align="end"
-                    className="hazard-location-dropdown-box-button"
-                  >
-                    {locationNames.map((name, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
-                    ))}
-                  </DropdownButton>
-                </InputGroup>
+                
               </div>
             </div>
 

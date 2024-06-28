@@ -22,7 +22,7 @@ html {
   width: 80%;
   border-bottom-right-radius: 200px;
   margin-left: -5%;
-  margin-bottom: 12%;
+  margin-bottom: 5%;
 }
 
 .hazard-location-header-title {
@@ -39,13 +39,18 @@ html {
 
 .hazard-location-dropdown-box {
   background-color: rgb(207, 215, 221);
-  height: 50%;
+  height: 30%;
   width: 80%;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   margin-bottom: 2%;
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.hazard-location-input-dropdown-box{
+  margin-top: 2%;
+  margin-left: 5%;
 }
 
 #hazard-location-input-group-dropdown-2{
@@ -60,10 +65,7 @@ html {
   color: #387373;
   font-weight: bolder;
 }
-.hazard-location-input-dropdown-box{
-  width: 100%;
-  margin-top: 10%;
-}
+
 
 .hazard-location-button-box1 {
   /* background-color: rgb(165, 168, 168); */
@@ -120,6 +122,10 @@ html {
 .hazard-location-back-button:hover {
   background-color: #0a3030;
   
+}
+
+.hazard-location-input-dropdown-box{
+  margin-bottom: 20%;
 }
 
 /* ..........right side design start.......... */
