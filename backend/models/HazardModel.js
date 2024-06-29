@@ -16,7 +16,7 @@ const HazardSchema = new Schema(
             type: Date,
             default: Date.now
         },
-        hazardLocation: {
+        locationName: {
             type: String,
             required: true,
             // enum: ['jaffna'] // need to change if there are predefined locations
@@ -70,6 +70,8 @@ HazardSchema.pre('save', function(next) {
             next(err);
         });
 });
+
+
 
 const Hazard = mongoose.model('Hazard', HazardSchema);
 

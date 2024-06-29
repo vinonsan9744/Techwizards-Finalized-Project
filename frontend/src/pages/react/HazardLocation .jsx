@@ -87,7 +87,7 @@ function HazardLocation() {
             <div className="hazard-location-dropdown-box container-flex">
               <div>
                 {/* Dropdown for location types */}
-                <InputGroup className="hazard-location-input-dropdown-box">
+                <InputGroup className="hazard-location-input-dropdown-box ">
                   <Form.Control
                     aria-label="Text input with dropdown button"
                     id="hazard-location-input"
@@ -109,7 +109,7 @@ function HazardLocation() {
                 </InputGroup>
 
                 {/* Dropdown for location names */}
-                <InputGroup className="hazard-location-input-dropdown-box">
+                <InputGroup className="hazard-location-input-dropdown-box ">
                   <Form.Control
                     aria-label="Text input with dropdown button"
                     id="hazard-location-input"

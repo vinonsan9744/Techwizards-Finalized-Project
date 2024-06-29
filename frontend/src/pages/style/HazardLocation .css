@@ -38,19 +38,22 @@ html {
 }
 
 .hazard-location-dropdown-box {
-  background-color: rgb(207, 215, 221);
-  height: 30%;
+  container: flex;
+  /* background-color: rgb(32, 131, 207); */
+  height: 40%;
   width: 80%;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 2%;
   margin-left: 10%;
   margin-right: 10%;
 }
 
 .hazard-location-input-dropdown-box{
+  width: 100%;
+  margin-left: 6%;
+  margin-right: 4%;
   margin-top: 2%;
-  margin-left: 5%;
 }
 
 #hazard-location-input-group-dropdown-2{
