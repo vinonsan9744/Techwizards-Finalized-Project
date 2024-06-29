@@ -112,10 +112,17 @@ function UpdateLPDetails() {
 
             <div className="UpdateLPDetails-input-box container-flex">
               <div>
-              <Form.Control size="lg" className="mb-2" type="text" placeholder="Large text" />
-            <Form.Control size="lg" type="text" placeholder="Large text" />
-            <Form.Control size="lg" type="text" placeholder="Large text" />
-            <Form.Control size="lg" type="text" placeholder="Large text" />
+              <Form.Floating className="mb-3">
+                <Form.Control
+                  id="floatingPhoneNo"
+                  type="tel"
+                  name="locomotivePhoneNo"
+                  placeholder="Phone Number"
+                 
+                  className="UpdateLPDetails-input-text-box"
+                />
+                <label htmlFor="floatingPhoneNo">Phone Number</label>
+              </Form.Floating>
               </div>
            
             

@@ -7,32 +7,74 @@ html {
 
 /* ..........left side design start.......... */
 
-.ah-main-left {
+.ApproveHazard-main-left {
   background-color: white;
   height: 100%;
 }
 
-.ah-header-box {
+.ApproveHazard-header-box {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: #387373;
   height: 20%;
-  width: 80%;
+  width: 100%;
   border-bottom-right-radius: 200px;
   margin-left: -5%;
  
 }
-
-.ah-title {
-  font-size: 4rem;
+.ApproveHazard-title {
+  font-size: 8vh;
   text-align: left;
   font-weight: bolder;
   margin-left: 5%;
   color: #e4f2e7;
 }
 
-.ah-newhazard-box {
+.ApproveHazard-newhazard-heading-box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 10%;
+  width: 96%;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #e4f2e7;
+  border-radius: 8px;
+}
+
+.ApproveHazard-newhazard-heading-title-box{
+  /* background-color: #787a7c; */
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+  margin-left: 1%;
+}
+
+.ApproveHazard-newhazard-heading-title-box h1{
+ color: #387373;
+ font-size: 4vh;
+ font-weight: bolder;
+}
+
+.ApproveHazard-newhazard-heading-notification-box{
+  /* background-color: #787a7c; */
+  height: 80%;
+  width: 10%;
+  margin-left: 17%;
+  margin-top: 1%;
+  
+}
+
+.ApproveHazard-newhazard-heading-notification-box h1{
+ color: #387373;
+  
+}
+
+
+.ApproveHazard-newhazard-box {
     display: flex;
   justify-content: center;
   align-items: center;
@@ -46,19 +88,9 @@ html {
   background-color: #387373;
 }
 
-.ah-newhazard-heading-box{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 11%;
-    width: 96%;
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 2%;
-    background-color: blanchedalmond;
-}
 
-.ah-newhazard-content-box{
+
+.ApproveHazard-newhazard-content-box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,23 +101,73 @@ html {
     margin-left: 2%;
     margin-right: 2%;
     border-radius: 3%;
-    background-color: blanchedalmond;
+    background-color: #e4f2e7;
 }
 
-.ah-detail-box{
+.ApproveHazard-detail-box{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 13%;
     width: 98%;
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 1%;
-    background-color: rgb(37, 91, 91);
-
+    background-color: #e4f2e7;
+    border: 0.5vh solid #387373;
+    border-radius: 8px;
+    
 }
 
-.ah-description-box{
+.ApproveHazard-detail-name-box{
+  /* background-color: #787a7c; */
+  width: 30%;
+  height: 100%;
+  margin-right: 2%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ApproveHazard-detail-name-box p{
+  color: #387373;
+  text-align: center;
+  font-weight: bolder;
+  padding-top: 10%;
+}
+
+
+.ApproveHazard-detail-loco-phone-box {
+  /* background-color: #787a7c; */
+  width: 40%;
+  height: 100%;
+  margin-right: 2%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ApproveHazard-detail-loco-phone-box p {
+  color: #387373;
+  text-align: center;
+  font-weight: bolder;
+  padding-top: 10%;
+}
+
+.ApproveHazard-detail-station-phone-box {
+  /* background-color: #787a7c; */
+  width: 40%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ApproveHazard-detail-station-phone-box p {
+  color: #387373;
+  text-align: center;
+  font-weight: bolder;
+  padding-top: 10%;
+}
+
+.ApproveHazard-description-box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,10 +176,12 @@ html {
     margin-top: 1%;
     margin-left: 1%;
     margin-right: 1%;
-    background-color: rgb(37, 91, 91);
+    background-color: #e4f2e7;
+    border: 0.5vh solid #387373;
+    border-radius: 8px;
 }
 
-.ah-accept-box{
+.ApproveHazard-accept-box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,38 +190,101 @@ html {
     margin-top: 1%;
     margin-left: 1%;
     margin-right: 1%;
-    background-color: rgb(37, 91, 91);
+    /* background-color: rgb(179, 184, 184); */
 }
 
-.ah-hazard-btn-box{
+.ApproveHazard-hazard-btn-box{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 40%;
-    width: 98%;
+    width: 100%;
     margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
-    background-color: aliceblue;
+    
+    /* background-color: aliceblue; */
 }
 
-.ah-location-btn-box{
+.ApproveHazard-hazard-left-icon-box{
+  display: flex;
+background-color: #387373;
+height: 100%;
+width: 15%;
+border-top-left-radius: 16px;
+border-bottom-left-radius: 16px;
+justify-content: center;
+align-items: center;
+color: #e4f2e7;
+font-size: 6vh;
+}
+
+.ApproveHazard-hazard-middle-input-box{
+  display: flex;
+/* background-color: #e4f2e7; */
+height: 100%;
+width: 70%;
+justify-content: center;
+align-items: center;
+
+
+border: 0.5vh solid #387373;
+}
+
+.ApproveHazard-hazard-middle-input-box p{
+  color: #387373;
+  font-size: 5vh;
+  font-weight: bolder;
+  margin-top: 4%;
+}
+
+.ApproveHazard-hazard-right-button-box{
+  display: flex;
+background-color: #387373;
+height: 100%;
+width: 20%;
+justify-content: center;
+align-items: center;
+color: #e4f2e7;
+font-size: 6vh;
+border-top-right-radius: 16px;
+border-bottom-right-radius:16px ;
+}
+
+.ApproveHazard-hazard-right-button{
+  display: flex;
+background-color: #387373;
+height: 100%;
+width: 100%;
+justify-content: center;
+align-items: center;
+color: #e4f2e7;
+font-weight: bolder;
+border-top-right-radius: 16px;
+border-bottom-right-radius:16px ;
+border:  solid #387373;
+border-left: 0px;
+}
+
+.ApproveHazard-hazard-right-button:hover{
+
+background-color: #0a4747;
+border:  solid #387373;
+
+}
+.ApproveHazard-location-btn-box{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40%;
-    width: 98%;
+    width: 100%;
     margin-top: 1%;
     margin-bottom: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
 }
 
 
 /* ..........right side design start.......... */
 .ah-main-right {
-  background-color: #787a7c;
+  background-color: #387373;
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -146,7 +293,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+   
     height: 10%;
     width: 90%;
     margin-left: 5%;
@@ -157,106 +304,40 @@ html {
     font-weight: bold;
     color: #387373;
   }
+  .ah-right-header-box h1{
+    color: #e4f2e7;
+    font-weight: bolder;
+  }
+
+#ah-input-group-dropdown-2{
+background-color: #e4f2e7;
+color: #387373;
+font-weight: bolder;
+font-size: 3vh;
+}
+
+  .ah-box {
+    
+    height: 8%;
+    width: 100%;
+   margin-bottom: 2%;
+   margin-top: 4%;
+  }
   
-  .ah-right-hazard-approve-main-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(199, 207, 207);
-    height: 35%;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-  
-  
-  .ah-right-location-box {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(99, 66, 69);
-    height: 25%;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
+  .ah-button{
+    height: 100%;
+    width: 50%;
+    background-color: #e4f2e7;
+    color: #387373;
+    font-weight: bolder;
+    font-size: 4vh;
   }
 
-  .ah-location-content-box{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: aquamarine;
-    height: 20%;
-    width: 60%;
-  }
-
-  .ah-location-icon-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: aquamarine;
-    height: 20%;
-    width: 20%;
-  }
-
-  
-  .ah-right-hazards-box  {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(99, 66, 69);
-    height: 25%;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-  }
-
-  .ah-hazard-content-box{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: aquamarine;
-    height: 20%;
-    width: 60%;
-  }
-
-  .ah-hazard-icon-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: aquamarine;
-    height: 20%;
-    width: 20%;
-  }
-
-  
-  .ah-button-box1 {
-    background-color: rgb(199, 207, 207);
-    height: 10%;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 4%;
-  }
-
-  .ah-button-box2 {
-    background-color: rgb(199, 207, 207);
-    height: 10%;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 4%;
-  }
-
-  .ah-button-box3 {
-    background-color: rgb(199, 207, 207);
-    height: 10%;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 4%;
-    margin-bottom: 4%;
+  .ah-button:hover{
+    height: 100%;
+    width: 50%;
+    background-color: #fdfdfd;
+    color: #387373;
+    font-weight: bolder;
+    font-size: 4vh;
   }
