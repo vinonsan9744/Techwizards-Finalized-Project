@@ -35,7 +35,7 @@ function AdminHomePage() {
                bulk of the card's content.
             </Card.Text>
             
-              <Button className="AdminHomePage-inserted-card-box-button"  onClick={() => navigate('/updatehazard')}>Approve Hazard</Button>
+              <Button className="AdminHomePage-inserted-card-box-button"  onClick={() => navigate('/approvehazard')}>Approve Hazard</Button>
            </Card.Body>
           </Card>
         </div>
