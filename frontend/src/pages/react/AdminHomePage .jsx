@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
+
 import React from "react";
 import "./../style/AdminHomePage .css";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import hazardimage from '../assets/hazard.jpeg';
 
+import { useNavigate } from 'react-router-dom';
+
 function AdminHomePage() {
+  const navigate = useNavigate();
   return (
     <>
    
@@ -30,7 +34,8 @@ function AdminHomePage() {
                Some quick example text to build on the card title and make up the
                bulk of the card's content.
             </Card.Text>
-              <Button className="AdminHomePage-inserted-card-box-button">Go somewhere</Button>
+            
+              <Button className="AdminHomePage-inserted-card-box-button"  onClick={() => navigate('/approvehazard')}>Approve Hazard</Button>
            </Card.Body>
           </Card>
         </div>
@@ -45,7 +50,7 @@ function AdminHomePage() {
                Some quick example text to build on the card title and make up the
                bulk of the card's content.
             </Card.Text>
-              <Button className="AdminHomePage-inserted-card-box-button">Go somewhere</Button>
+              <Button className="AdminHomePage-inserted-card-box-button"onClick={() => navigate('/hazardlocation')}>Hazard Location</Button>
            </Card.Body>
           </Card>
         </div>
@@ -60,7 +65,7 @@ function AdminHomePage() {
                Some quick example text to build on the card title and make up the
                bulk of the card's content.
             </Card.Text>
-              <Button className="AdminHomePage-inserted-card-box-button">Go somewhere</Button>
+              <Button className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/updatelpdetails')}>Locomotive pilot </Button>
            </Card.Body>
           </Card>
         </div>
@@ -75,7 +80,7 @@ function AdminHomePage() {
                Some quick example text to build on the card title and make up the
                bulk of the card's content.
             </Card.Text>
-              <Button className="AdminHomePage-inserted-card-box-button">Go somewhere</Button>
+              <Button className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/updatehazard')}>Update hazards</Button>
            </Card.Body>
           </Card>
         </div>
