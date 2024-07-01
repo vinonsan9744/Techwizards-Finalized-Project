@@ -285,4 +285,5 @@ html {
   font-size: 4vh;
   text-decoration: underline;
   font-weight: bolder;
+  cursor: pointer;
 }

@@ -113,7 +113,7 @@ function UpdateHazard() {
 
             <div className="update-hazard-button-box">
             <Button variant="outline-dark" className='update-hazard-button' >Submit</Button>{' '}
-            <Button variant="outline-dark" className='update-hazard-button' onClick={() => navigate('/adminhomepage')}>Back</Button>{' '}
+            <Button variant="outline-dark" className='update-hazard-button' onClick={() => navigate('/homepage')}>Back</Button>{' '}
             
             </div>
             

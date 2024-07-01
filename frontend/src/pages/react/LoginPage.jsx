@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./../style/LoginPage.css";
 import axios from "axios";
@@ -15,11 +16,7 @@ import { FaMapLocationDot } from "react-icons/fa6";
 
 function LoginPage() {
   const [selectedOption, setSelectedOption] = useState("");
-  const [details, setDetails] = useState({
-    id: "",
-    password: "",
-  });
-
+  const [details, setDetails] = useState({ id: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -30,10 +27,7 @@ function LoginPage() {
   };
 
   const handleChange = (e) => {
-    setDetails({
-      ...details,
-      [e.target.name]: e.target.value,
-    });
+    setDetails({ ...details, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -41,31 +35,33 @@ function LoginPage() {
 
     try {
       // Fetch user data from the database based on the selected option
-      const userResponse = await axios.get(
+      const url =
         selectedOption === "option1"
           ? `http://localhost:4000/api/locomotivePilot/${details.id}`
-          : `http://localhost:4000/api/AdministrativeOfficer/${details.id}`
-      );
+          : `http://localhost:4000/api/AdministrativeOfficer/${details.id}`;
+
+      console.log("Making request to:", url);
+
+      const userResponse = await axios.get(url);
 
       const userData = userResponse.data;
 
       // Compare the user data with the details entered by the user
       if (
-        selectedOption === "option1"
+        (selectedOption === "option1"
           ? userData.locomotivePilotID === details.id
-          : userData.AD_ID === details.id &&
-            userData.password === details.password
+          : userData.AD_ID === details.id) &&
+        userData.password === details.password
       ) {
         // IDs and passwords match, proceed with login
         console.log("Login successful");
 
         setError(""); // Clear any previous errors
         setSuccess(true); // Show success message
-        setDetails({
-          id: "",
-          password: "",
-        }); // Clear the form inputs
-        console.log(details);
+
+        // Clear the form inputs
+        setDetails({ id: "", password: "" });
+
         // Show success message and navigate to home page after 2 seconds
         setTimeout(() => {
           navigate("/homepage");
@@ -77,18 +73,15 @@ function LoginPage() {
       }
     } catch (error) {
       console.error("Login failed:", error); // Log the error
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error); // Set error message from server response
-      } else {
-        setError("Login failed. Please try again."); // Set a generic error message
-      }
+      setError(
+        error.response && error.response.data && error.response.data.error
+          ? error.response.data.error
+          : "Login failed. Please try again."
+      );
       setShowErrorModal(true); // Show error modal
     } finally {
       // Always clear the form inputs
-      setDetails({
-        id: "",
-        password: "",
-      });
+      setDetails({ id: "", password: "" });
     }
   };
 
@@ -179,7 +172,7 @@ function LoginPage() {
                 <Modal.Header closeButton>
                   <Modal.Title>Success</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Registration successful!</Modal.Body>
+                <Modal.Body>Login successful!</Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={() => setSuccess(false)}>
                     Close
