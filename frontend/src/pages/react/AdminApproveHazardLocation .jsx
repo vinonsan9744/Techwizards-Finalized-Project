@@ -3,10 +3,12 @@ import React from "react";
 import "./../style/AdminApproveHazardLocation .css";
 import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
-
+import { useNavigate } from 'react-router-dom';
 function AdminApproveHazardLocation() {
+  const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = React.useState('card');
   return (
+    
     <>
       {/* this is the main dision of screen  */}
       <div className="container-flex vh-100">
@@ -76,7 +78,7 @@ function AdminApproveHazardLocation() {
             </div>
 
             <div className="AdminApproveHazardLocation-button-box2 container-flex ">
-              <Button className="AdminApproveHazardLocation-cancel-button">Cancel</Button>
+              <Button className="AdminApproveHazardLocation-cancel-button" onClick={() => navigate('/approvehazard')}>Cancel</Button>
             </div>
           </div>
           {/* this is the left side box end */}

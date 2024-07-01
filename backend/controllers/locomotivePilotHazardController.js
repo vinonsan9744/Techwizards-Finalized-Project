@@ -12,4 +12,14 @@ const createTask = async(req,res)=>{
 
 };
 
+// to create a Get method to all
+const getTasks = async (req,res) => {
+    try{
+    const administrativeOfficer = await administrativeOfficerModel.find({});
+    res.status(200).json(administrativeOfficer);
+    } catch (e){
+        res.status(400).jeson({ error:e.message});
+    }
+};
+
 module.exports={createTask};

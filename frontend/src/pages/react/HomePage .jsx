@@ -6,8 +6,10 @@ import { FaWind } from "react-icons/fa";
 import { IoIosCloudyNight } from "react-icons/io";
 import { BsFillCloudFog2Fill } from "react-icons/bs";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate = useNavigate();
   const [isContentVisible, setIsContentVisible] = useState(true);
   const [isGreen, setIsGreen] = useState(false);
 
@@ -34,9 +36,9 @@ function HomePage() {
                       >
                         {isGreen ? (
                           <div className="navigation-buttons container-flex">
-                            <button className="nav-button">Select Route</button>
-                            <button className="nav-button">Report Hazard</button>
-                            <button className="nav-button">view hazard location</button>
+                            <button className="nav-button" onClick={() => navigate('/selectroute')}>Select Route</button>
+                            <button className="nav-button" onClick={() => navigate('/updatehazard')}>Report Hazard</button>
+                            <button className="nav-button" onClick={() => navigate('/hazardlocation')}>view hazard location</button>
                           </div>
                         ) : (
                           isContentVisible && (
@@ -48,7 +50,7 @@ function HomePage() {
                                 <h6>01:30 pm</h6>
                               </div>
                               <div className="HomePage-left-top-side-content-location-box container-flex">
-                                <h6>Jaffna</h6>
+                                <h6>Anuradhapura New town</h6>
                               </div>
                               <div className="HomePage-left-top-side-content-weather-box container-flex">
                                 <h6>chance of rain 88%</h6>

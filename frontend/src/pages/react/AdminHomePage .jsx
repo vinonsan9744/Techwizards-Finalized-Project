@@ -80,7 +80,7 @@ function AdminHomePage() {
                Some quick example text to build on the card title and make up the
                bulk of the card's content.
             </Card.Text>
-              <Button className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/updatehazard')}>Update hazards</Button>
+              <Button className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/adminhazardlocation')}>Update hazards</Button>
            </Card.Body>
           </Card>
         </div>

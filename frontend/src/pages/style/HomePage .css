@@ -45,6 +45,19 @@ html {
   height: 100%;
   border-top-left-radius: 16px;
   margin-left: 3%;
+  display: flex;
+}
+
+.HomePage-left-top-side-button-box button{
+  background-color: #dff1f1;
+  border-top-left-radius: 16px;
+  height: 30%;
+  margin: 2%;
+}
+
+.HomePage-left-top-side-button-box h3{
+ color: #355e5e;
+ font-size: x-large;
 }
 
 .HomePage-left-top-side-content-box{

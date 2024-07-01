@@ -6,9 +6,11 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function HazardLocation() {
+  const navigate = useNavigate();
   const [locationTypes, setLocationTypes] = useState([]);
   const [selectedLocationType, setSelectedLocationType] = useState('');
   const [locationNames, setLocationNames] = useState([]);
@@ -81,7 +83,7 @@ function HazardLocation() {
           {/* Left side box */}
           <div className="hazard-location-main-left col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="hazard-location-header-box container-flex w-100 vh-30">
-              <h1 className="hazard-location-header-title">Hazard Location</h1>
+              <h1 className="hazard-location-header-title">View Hazard</h1>
             </div>
 
             <div className="hazard-location-dropdown-box container-flex">
@@ -137,7 +139,7 @@ function HazardLocation() {
             </div>
 
             <div className="hazard-location-button-box2 container-flex vh-30">
-              <Button className="hazard-location-back-button">Back</Button>
+              <Button className="hazard-location-back-button" onClick={() => navigate('/homepage')}>Back</Button>
             </div>
           </div>
 

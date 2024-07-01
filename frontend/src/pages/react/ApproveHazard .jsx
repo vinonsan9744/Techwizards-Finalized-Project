@@ -138,7 +138,7 @@ function ApproveHazard () {
             </InputGroup>
 
             <div className="ah-box button-box container-flex">
-            <Button variant="outline-dark" className='ah-button' >Approve</Button>{' '}
+            <Button variant="outline-dark" className='ah-button'onClick={() => navigate('/adminapprovehazardlocation')} >Approve</Button>{' '}
            
             </div>
 

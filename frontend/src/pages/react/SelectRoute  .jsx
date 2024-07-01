@@ -5,8 +5,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 function SelectRoute() {
+  const navigate = useNavigate();
   return (
     <>
       {/* ..........this is the main division of screen.......... */}
@@ -90,7 +92,7 @@ function SelectRoute() {
             </div>
 
             <div className="select-route-back-button-box button-box container-flex">
-            <Button className="select-route-back-button" variant="success">Back</Button>{' '}
+            <Button className="select-route-back-button" onClick={() => navigate('/homepage')}>Back</Button>{' '}
             </div>
             
             
