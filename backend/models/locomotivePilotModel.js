@@ -22,6 +22,7 @@ const locomotivePilotSchema = new mongoose.Schema({
         type: String,
         unique: true,
         match: [/^LID\d{3}$/, 'LD_ID must match the format "LID###"']
+        
     },
     locomotiveName: {
         type: String,
@@ -59,6 +60,7 @@ const locomotivePilotSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
 
 // Function to check if a phone number already exists
 locomotivePilotSchema.statics.checkDuplicatePhone = async function(phoneNo) {
