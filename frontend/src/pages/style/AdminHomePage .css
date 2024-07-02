@@ -6,16 +6,16 @@ html {
 }
 
 /* ..........left side design start.......... */
-.AdminHomePage-heading-box{
+.AdminHomePage-heading-box {
   background-color: #387373;
   height: 100%;
   margin: 0;
   width: 100%;
-  border-bottom-right-radius:100px ;
+  border-bottom-right-radius: 100px;
   justify-content: center;
   align-items: center;
 }
-.AdminHomePage-left-container-flex{
+.AdminHomePage-left-container-flex {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,15 +25,15 @@ html {
   padding: 0;
   margin: 0;
 }
-.AdminHomePage-heading-title{
+.AdminHomePage-heading-title {
   font-size: 8vh;
-font-weight: bolder;
-color: #e4f2e7;
-text-align: center;
-margin-top: 1%;
+  font-weight: bolder;
+  color: #e4f2e7;
+  text-align: center;
+  margin-top: 1%;
 }
 /* ..........right side design start.......... */
-.AdminHomePage-right-container-flex{
+.AdminHomePage-right-container-flex {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,26 +44,20 @@ margin-top: 1%;
   margin: 0;
 }
 
-.AdminHomePage-card-box-1{
-  
-  height: 100%;
-  
-}
-.AdminHomePage-card-box-2{
-  
+.AdminHomePage-card-box-1 {
   height: 100%;
 }
-.AdminHomePage-card-box-3{
-  
+.AdminHomePage-card-box-2 {
   height: 100%;
 }
-.AdminHomePage-card-box-4{
-  
+.AdminHomePage-card-box-3 {
+  height: 100%;
+}
+.AdminHomePage-card-box-4 {
   height: 100%;
 }
 
-.AdminHomePage-inserted-card-box-1{
-  
+.AdminHomePage-inserted-card-box-1 {
   height: 96%;
   margin-top: 2%;
   margin-bottom: 2%;
@@ -74,8 +68,7 @@ margin-top: 1%;
   margin-right: 5%;
 }
 
-.AdminHomePage-inserted-card-box-2{
-  
+.AdminHomePage-inserted-card-box-2 {
   height: 96%;
   margin-top: 2%;
   margin-bottom: 2%;
@@ -86,8 +79,7 @@ margin-top: 1%;
   margin-right: 5%;
 }
 
-.AdminHomePage-inserted-card-box-3{
-  
+.AdminHomePage-inserted-card-box-3 {
   height: 96%;
   margin-top: 2%;
   margin-bottom: 2%;
@@ -98,8 +90,7 @@ margin-top: 1%;
   margin-right: 5%;
 }
 
-.AdminHomePage-inserted-card-box-4{
-  
+.AdminHomePage-inserted-card-box-4 {
   height: 96%;
   margin-top: 2%;
   margin-bottom: 2%;
@@ -110,35 +101,34 @@ margin-top: 1%;
   margin-right: 5%;
 }
 
-.AdminHomePage-inserted-card{
+.AdminHomePage-inserted-card {
   border-color: #387373;
   border-radius: 5vh;
 }
-.AdminHomePage-inserted-card-box-image{
+.AdminHomePage-inserted-card-box-image {
   height: 50%;
   width: 100%;
   border-top-left-radius: 4vh;
   border-top-right-radius: 4vh;
 }
-.AdminHomePage-inserted-card-box-title{
+.AdminHomePage-inserted-card-box-title {
   font-size: 4vh;
-font-weight: bolder;
-color: #387373;
+  font-weight: bolder;
+  color: #387373;
 }
-.AdminHomePage-inserted-card-box-text{
-  font-size: 3vh;
+.AdminHomePage-inserted-card-box-text {
+  font-size: 20px;
   font-weight: bolder;
   color: #387373;
 }
 
-.AdminHomePage-inserted-card-box-button{
+.AdminHomePage-inserted-card-box-button {
   background-color: #387373;
   color: #e4f2e7;
   font-weight: bolder;
-  
 }
 
-.AdminHomePage-inserted-card-box-button:hover{
+.AdminHomePage-inserted-card-box-button:hover {
   background-color: #0f3838;
   color: #e4f2e7;
   font-weight: bolder;

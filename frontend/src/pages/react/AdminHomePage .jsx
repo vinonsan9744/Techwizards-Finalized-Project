@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./../style/AdminHomePage .css";
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import approvehazard from '../assets/ApproveHazard.jpg';
@@ -9,21 +10,14 @@ import hazardlocation from '../assets/HazardLocation.jpg';
 import locomotivepilot from '../assets/LocomotivePilot.jpg';
 import updatehazard from '../assets/UpdateHazard.jpg';
 
+
 import { useNavigate } from 'react-router-dom';
 
 function AdminHomePage() {
   const navigate = useNavigate();
   return (
     <>
-   
-   <div className="AdminHomePage-left-container-flex ">
-  <div className="row">
 
-    <div className="col-12 AdminHomePage-heading-box vh-20">
-      <h1 className="AdminHomePage-heading-title ">Admin Home Page</h1>
-    </div>
-  </div>
-</div>
 
 <div className="AdminHomePage-right-container-flex ">
   <div className="row">
@@ -86,10 +80,12 @@ function AdminHomePage() {
               <Button className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/adminhazardlocation')}>Update hazards</Button>
            </Card.Body>
           </Card>
+
+     
+   
+
         </div>
-    </div>
-  </div>
-</div>
+      </div>
     </>
   );
 }
