@@ -70,7 +70,7 @@ function UpdateLPDetails() {
       setModalType('success');
       setShowModal(true);
       // Navigate to adminhomepage after showing the success message
-      setTimeout(() => navigate('/adminhomepage'), 1500);
+      // setTimeout(() => navigate('/adminhomepage'), 1500);
     } catch (error) {
       console.error('Error updating pilot details:', error);
       setModalMessage('Error updating pilot details. Please try again.');
@@ -222,18 +222,20 @@ function UpdateLPDetails() {
         </div>
       </div>
 
-         {/* Modal for showing success or error message */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{modalType === 'success' ? 'Success' : 'Error'}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body id={modalType === 'success' ? 'modal-success' : 'modal-error'} className={`modal-${modalType}`}>
-          {modalMessage}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='UpdateLPDetails-close-button' variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+      // Inside your JSX return statement in UpdateLPDetails component
+
+<Modal show={showModal} onHide={() => setShowModal(false)} centered>
+  <Modal.Header closeButton>
+    <Modal.Title>{modalType === 'success' ? 'Success' : 'Error'}</Modal.Title>
+  </Modal.Header>
+  <Modal.Body id={modalType === 'success' ? 'modal-success' : 'modal-error'} className={`modal-${modalType}`}>
+    {modalMessage}
+  </Modal.Body>
+  <Modal.Footer>
+    <Button className={`UpdateLPDetails-close-button-${modalType}`} variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+  </Modal.Footer>
+</Modal>
+
     </>
   );
 }
