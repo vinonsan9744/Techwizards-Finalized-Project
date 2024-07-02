@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import React from "react";
 import "./../style/AdminHomePage .css";
 import Button from "react-bootstrap/Button";
@@ -8,9 +9,13 @@ import approvehazardimage from "../assets/ApproveHazard.jpg";
 import locomotivepilotimage from "../assets/LocomotivePilot.jpg";
 import updatehazardimage from "../assets/UpdateHazard.jpg";
 
+import { useNavigate } from 'react-router-dom';
+
 function AdminHomePage() {
+  const navigate = useNavigate();
   return (
     <>
+
       <div className="AdminHomePage-left-container-flex ">
         <div className="row">
           <div className="col-12 AdminHomePage-heading-box vh-20">
@@ -125,6 +130,8 @@ function AdminHomePage() {
               </Card>
             </div>
           </div>
+   
+   
         </div>
       </div>
     </>

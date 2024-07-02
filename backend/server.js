@@ -4,14 +4,16 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
 // Middleware to parse JSON requests
 app.use(express.json());
 
 // Define CORS options
 const corsOptions = {
-  origin: "http://localhost:5173", // Replace with your frontend URL
-  methods: ["GET", "POST"], // Specify allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+
+  origin: 'http://localhost:5173', // Replace with your frontend URL
+  methods: ['GET', 'POST','PATCH'], // Specify allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed heade
 };
 
 // Enable CORS with specific options
@@ -36,10 +38,28 @@ mongoose
   })
   .catch((error) => console.log("DB connection error:", error));
 
-// Routes
-const locomotivePilotRoute = require("./routes/locomotivePilotRoute");
-const AdministrativeOfficerRoute = require("./routes/AdministrativeOfficerRoute");
 
-// Connect routes
-app.use("/api/AdministrativeOfficer", AdministrativeOfficerRoute);
-app.use("/api/locomotivePilot", locomotivePilotRoute);
+
+// declare task name 
+const taskRoutes=require('./routes/taskRoute');
+
+const AdministrativeOfficerRoutes=require('./routes/AdministrativeOfficerRoute');
+const LocationRoute=require('./routes/LocationRoute');
+const weatherHazardRoute=require('./routes/weatherHazardRoute');
+const locomotivePilotRoute=require('./routes/locomotivePilotRoute');
+const locomotivePilotHazardRoute=require('./routes/locomotivePilotHazardRoute');
+const HazardRoute=require('./routes/HazardRoute');
+const WeatherRoute=require('./routes/WeatherRoute');
+
+
+
+// connect route 
+app.use("/api/tasks",taskRoutes);
+app.use("/api/AdministrativeOfficer",AdministrativeOfficerRoutes);
+app.use("/api/location",LocationRoute);
+app.use("/api/weatherHazard",weatherHazardRoute);
+app.use("/api/locomotivePilot",locomotivePilotRoute);
+app.use("/api/locomotivePilotHazard",locomotivePilotHazardRoute);
+app.use("/api/hazard",HazardRoute);
+app.use("/api/weather",WeatherRoute);
+
