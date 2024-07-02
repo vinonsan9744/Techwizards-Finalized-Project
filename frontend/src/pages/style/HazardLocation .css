@@ -69,6 +69,10 @@ html {
   font-weight: bolder;
 }
 
+.hazard-location-scrollable-dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
 
 .hazard-location-button-box1 {
   /* background-color: rgb(165, 168, 168); */
