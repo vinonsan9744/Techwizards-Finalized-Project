@@ -38,8 +38,6 @@ mongoose
 
 // Routes
 const locomotivePilotRoute = require("./routes/locomotivePilotRoute");
-const AdministrativeOfficerRoute = require("./routes/AdministrativeOfficerRoute");
 
 // Connect routes
-app.use("/api/AdministrativeOfficer", AdministrativeOfficerRoute);
 app.use("/api/locomotivePilot", locomotivePilotRoute);

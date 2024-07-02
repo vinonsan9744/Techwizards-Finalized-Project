@@ -17,8 +17,7 @@ import AdminApproveHazardLocation from "./pages/react/AdminApproveHazardLocation
 import UpdateLPDetails from "./pages/react/UpdateLPDetails";
 import AdminHazardLocation from "./pages/react/AdminHazardLocation ";
 import UpdateHazard from "./pages/react/UpdateHazard";
-
-
+import ViewHazard from "./pages/react/ViewHazard ";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +68,10 @@ const router = createBrowserRouter([
     path: "/updatehazard",
     element: <UpdateHazard />,
   },
- 
+  {
+    path: "/viewhazard",
+    element: <ViewHazard />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
