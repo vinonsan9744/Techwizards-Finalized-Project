@@ -91,11 +91,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #bdc2c2;
+    
     height: 15%;
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
+    width: 100%;
     margin-top: 2%;
    margin-bottom: 2%;
   }
@@ -111,29 +109,49 @@
     align-items: center;
     background-color: #387373;
     height: 3%;
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
    margin-bottom: 5%;
   }
 
 
   .hazard-RegisterPage-input-text-box::placeholder {
     color: #387373;
-    /* Adds  color to the placeholder text */
+    /* Adds color to the placeholder text */
     opacity: 50%;
   }
-  .hazard-RegisterPage-input-text-box{
-    height: 100%;
+  
+  .hazard-RegisterPage-input-text-box {
+    height: auto; /* Adjusted for better alignment */
     width: 100%;
-    font-size: 5vh;
+    font-size: 3vh;
     border-radius: 2vh;
     margin-top: 3%;
     margin-bottom: 3%;
     border: .5vh solid #387373;
     font-weight: bold;
     color: #387373;
+    padding: 0.75rem;
   }
+  .hazard-RegisterPage-input-text-box:hover {
+    
+    border: .5vh solid #387373;
+  
+  }
+  .form-floating > .hazard-RegisterPage-input-text-box {
+    padding: 1.5rem 0.75rem 0.375rem;
+    color: #387373;
+  }
+  
+  .form-floating > label {
+    color: #387373;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: 0.75rem;
+    
+  }
+  
   .hazard-RegisterPage-login-button-box{
     display: flex;
     justify-content: flex-start;
@@ -144,7 +162,7 @@
     margin-left: 25%;
     margin-right: 25%;
    margin-bottom: 2%;
-   margin-top: 2%;
+   margin-top: 4%;
    border-radius: 6vh;
   }
   .hazard-RegisterPage-login-button{
@@ -191,5 +209,6 @@
     margin-left: 25%;
     margin-right: 25%;
     border-radius: 6vh;
+    margin-top: 4%;
    margin-bottom: 2%;
   }

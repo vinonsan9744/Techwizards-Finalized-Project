@@ -2,9 +2,10 @@
 import React from "react";
 import "./../style/AdminHazardLocation.css";
 import { Form, Button } from "react-bootstrap";
-
+import { useNavigate } from 'react-router-dom';
 
 function AdminHazardLocation() {
+  const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = React.useState('card'); // Using React.useState
 
   return (
@@ -88,7 +89,7 @@ function AdminHazardLocation() {
             </div>
 
             <div className="admin-hazard-location-left-button-box2 container-flex">
-              <button className="admin-hazard-location-back-button">Back</button>
+              <button className="admin-hazard-location-back-button" onClick={() => navigate('/adminhomepage')}>Back</button>
             </div>
           </div>
           {/* ..........left side box ended.......... */}

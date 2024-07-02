@@ -1,3 +1,4 @@
+
 body,
 html {
   margin: 0;
@@ -21,7 +22,7 @@ html {
   width: 80%;
   border-bottom-right-radius: 200px;
   margin-left: -5%;
-  margin-bottom: 12%;
+  margin-bottom: 5%;
 }
 
 .hazard-location-header-title {
@@ -32,36 +33,42 @@ html {
   color: #e4f2e7;
   margin-bottom: 5%;
   margin-top: 3%;
+
+
 }
 
 .hazard-location-dropdown-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: rgb(165, 168, 168); */
-  height: 20%;
+  container: flex;
+  /* background-color: rgb(32, 131, 207); */
+  height: 40%;
   width: 80%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 2%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 10%;
 }
 
-.hazard-location-dropdown-textbox {
-  height: 70%;
+.hazard-location-input-dropdown-box{
   width: 100%;
-  font-size: 5vh;
-  margin-top: 15%;
-  margin-bottom: 15%;
-  border-radius: 4vh;
-  border: 0.5vh solid #387373;
-  font-weight: bold;
+  margin-left: 6%;
+  margin-right: 4%;
+  margin-top: 2%;
 }
 
-.hazard-location-dropdown-textbox::placeholder {
-  color: #387373;
-  /* Adds  color to the placeholder text */
-  opacity: 50%;
+#hazard-location-input-group-dropdown-2{
+  background-color: #387373;
+  color: #e4f2e7;
+  font-size: 1.2rem;
+  font-weight: bolder;
 }
+#hazard-location-input{
+  border: .5vh solid #387373;
+  font-size: 1.2rem;
+  color: #387373;
+  font-weight: bolder;
+}
+
 
 .hazard-location-button-box1 {
   /* background-color: rgb(165, 168, 168); */
@@ -70,9 +77,11 @@ html {
   margin-left: 30%;
   margin-right: 30%;
   margin-bottom: 5%;
+  
 }
 
 .hazard-location-search-button {
+
   margin-left: 5%;
   margin-right: 5%;
   background-color: #387373;
@@ -82,10 +91,12 @@ html {
   font-weight: bolder;
   font-size: 5vh;
   border-radius: 6vh;
+
 }
 
 .hazard-location-search-button:hover {
   background-color: #0a3030;
+  
 }
 
 .hazard-location-button-box2 {
@@ -98,6 +109,7 @@ html {
 }
 
 .hazard-location-back-button {
+
   margin-left: 5%;
   margin-right: 5%;
   background-color: #387373;
@@ -107,10 +119,16 @@ html {
   font-weight: bolder;
   font-size: 5vh;
   border-radius: 6vh;
+  
 }
 
 .hazard-location-back-button:hover {
   background-color: #0a3030;
+  
+}
+
+.hazard-location-input-dropdown-box{
+  margin-bottom: 20%;
 }
 
 /* ..........right side design start.......... */
@@ -131,6 +149,7 @@ html {
   margin-bottom: 6%;
   margin-top: 2%;
   border-radius: 4vh;
+
 }
 
 .hazard-location-heading {
@@ -168,13 +187,14 @@ html {
   color: #e4f2e7;
   font-size: 5vh;
   font-weight: bold;
+  
 }
 
 .hazard-location-possible-content-box1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #5a0811;
+  background-color: #5A0811;
   height: 15%;
   width: 70%;
   margin-bottom: 2%;
@@ -200,3 +220,4 @@ html {
   margin-right: 25%;
   margin-bottom: 3%;
 }
+

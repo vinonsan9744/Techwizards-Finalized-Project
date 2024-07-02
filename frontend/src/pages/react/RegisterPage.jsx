@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import axios from "axios";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import "./../style/RegisterPage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { GiElephant } from "react-icons/gi";
 import { MdLandslide } from "react-icons/md";
 import { FaTrainSubway } from "react-icons/fa6";
@@ -16,19 +16,20 @@ import { FaMapLocationDot } from "react-icons/fa6";
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    locomotiveName: "",
-    locomotiveEmail: "",
-    locomotivePhoneNo: "",
+    locomotiveName: '',
+    locomotiveEmail: '',
+    locomotivePhoneNo: ''
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -36,31 +37,29 @@ function RegisterPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/locomotivePilot",
-        formData
-      );
+      const response = await axios.post('http://localhost:4000/api/locomotivePilot', formData);
       console.log(response.data); // Handle success response
-      setError(""); // Clear any previous errors
+      setError(''); // Clear any previous errors
       setSuccess(true); // Show success message
       setFormData({
-        locomotiveName: "",
-        locomotiveEmail: "",
-        locomotivePhoneNo: "",
+        locomotiveName: '',
+        locomotiveEmail: '',
+        locomotivePhoneNo: ''
       }); // Clear the form inputs
 
-      // Redirect to login page after 2 seconds
-      setTimeout(() => {
-        navigate("/");
+       // Redirect to login page after 2 seconds
+       setTimeout(() => {
+        navigate('/');
       }, 2000);
     } catch (error) {
-      console.error("Registration failed:", error); // Log the error
+      console.error('Registration failed:', error); // Log the error
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error); // Set error message from server response
       } else {
-        setError("Registration failed. Please try again."); // Set a generic error message
+        setError('Registration failed. Please try again.'); // Set a generic error message
       }
       setShowErrorModal(true); // Show error modal
+      
     }
   };
 
@@ -73,23 +72,10 @@ function RegisterPage() {
           {/* left side bar start */}
           <div className="RegisterPage-main-left col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
             <div className="hazard-RegisterPage-header-box container-flex">
-              <div className="hazard-RegisterPage-header-title">
-                Sri Lanka Railway Safety System
-              </div>
+              <div className="hazard-RegisterPage-header-title">Sri Lanka Railway Safety System</div>
             </div>
             <div className="hazard-RegisterPage-description-box container-flex">
-              <div className="hazard-RegisterPage-header-description">
-                <p>
-                  The login process for our Railway Safety System is
-                  straightforward and secure. Locomotive pilots or admins simply
-                  input their email and password on the login page. The system
-                  then verifies these details, ensuring only authorized
-                  personnel gain access. Upon successful verification, users are
-                  redirected to the main home page, where they can access
-                  tailored options and settings designed to facilitate a
-                  seamless navigation experience within the system.
-                </p>
-              </div>
+              <div className="hazard-RegisterPage-header-description"><p>The login process for our Railway Safety System is straightforward and secure. Locomotive pilots or admins simply input their email and password on the login page. The system then verifies these details, ensuring only authorized personnel gain access. Upon successful verification, users are redirected to the main home page, where they can access tailored options and settings designed to facilitate a seamless navigation experience within the system.</p></div>
             </div>
             <div className="hazard-RegisterPage-line-box container-flex"></div>
             <div className="hazard-RegisterPage-circle-box container-flex">
@@ -120,9 +106,7 @@ function RegisterPage() {
 
           <div className="RegisterPage-main-right col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
             <div className="hazard-RegisterPage-heading-box container-flex">
-              <div className="hazard-RegisterPage-heading-title">
-                Sign up Form
-              </div>
+              <div className="hazard-RegisterPage-heading-title">Sign up Form</div>
             </div>
             <div className="hazard-RegisterPage-heading-line-box container-flex"></div>
 
@@ -139,7 +123,6 @@ function RegisterPage() {
                 />
                 <label htmlFor="floatingName">Name</label>
               </Form.Floating>
-
               <Form.Floating className="mb-3">
                 <Form.Control
                   id="floatingEmail"
@@ -164,23 +147,11 @@ function RegisterPage() {
                 />
                 <label htmlFor="floatingPhoneNo">Phone Number</label>
               </Form.Floating>
-
               <div className="hazard-RegisterPage-login-button-box container-flex">
-                <Button
-                  type="submit"
-                  className="hazard-RegisterPage-login-button"
-                >
-                  Sign up
-                </Button>
+                <Button type="submit" className="hazard-RegisterPage-login-button">Sign up</Button>
               </div>
-
               <div className="hazard-RegisterPage-register-button-box container-flex">
-                <Button
-                  className="hazard-RegisterPage-signup-button"
-                  onClick={() => navigate("/")}
-                >
-                  Sign in
-                </Button>
+                <Button className="hazard-RegisterPage-signup-button" onClick={() => navigate('/')}>Sign in</Button>
               </div>
             </Form>
 
@@ -189,13 +160,9 @@ function RegisterPage() {
                 <Modal.Header closeButton>
                   <Modal.Title>Success</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                  Registration successful! You are redirecting to login page !
-                </Modal.Body>
+                <Modal.Body>Registration successful! You are redirecting to login page !</Modal.Body>
                 <Modal.Footer>
-                  <Button variant="success" onClick={() => setSuccess(false)}>
-                    Close
-                  </Button>
+                  <Button variant="success" onClick={() => setSuccess(false)}>Close</Button>
                 </Modal.Footer>
               </Modal>
             )}
@@ -207,10 +174,10 @@ function RegisterPage() {
                 </Modal.Header>
                 <Modal.Body className="modal-body">{error}</Modal.Body>
                 <Modal.Footer className="modal-footer">
-                  <Button
-                    variant="danger"
-                    onClick={handleCloseErrorModal}
-                    className="modal-close-btn"
+                  <Button 
+                  variant="danger" 
+                  onClick={handleCloseErrorModal}
+                  className="modal-close-btn"
                   >
                     Close
                   </Button>
