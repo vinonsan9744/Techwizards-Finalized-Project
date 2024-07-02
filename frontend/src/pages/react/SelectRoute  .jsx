@@ -34,7 +34,7 @@ function SelectRoute() {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
-          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
+          const response = await axios.get(http://localhost:4000/api/location?locationType=${selectedLocationType});
           const filteredNames = response.data
             .filter(location => location.locationType === selectedLocationType)
             .map(location => location.locationName);

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import "./../style/UpdateLPDetails.css";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -69,8 +70,7 @@ function UpdateLPDetails() {
       setModalMessage('Pilot details updated successfully.');
       setModalType('success');
       setShowModal(true);
-      // Navigate to adminhomepage after showing the success message
-      // setTimeout(() => navigate('/adminhomepage'), 1500);
+
     } catch (error) {
       console.error('Error updating pilot details:', error);
       setModalMessage('Error updating pilot details. Please try again.');
