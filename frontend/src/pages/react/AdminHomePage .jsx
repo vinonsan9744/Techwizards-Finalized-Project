@@ -4,7 +4,10 @@ import React from "react";
 import "./../style/AdminHomePage .css";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import hazardimage from '../assets/hazard.jpeg';
+import approvehazard from '../assets/ApproveHazard.jpg';
+import hazardlocation from '../assets/HazardLocation.jpg';
+import locomotivepilot from '../assets/LocomotivePilot.jpg';
+import updatehazard from '../assets/UpdateHazard.jpg';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +30,7 @@ function AdminHomePage() {
     <div className="col-sm-12 col-md-6 col-lg-3 AdminHomePage-card-box-1">
         <div className="AdminHomePage-inserted-card-box-1"> 
           <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
-            <Card.Img variant="top" src={hazardimage} className="AdminHomePage-inserted-card-box-image"/>
+            <Card.Img variant="top" src={approvehazard} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
               <Card.Title className="AdminHomePage-inserted-card-box-title">Approve Hazard</Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
@@ -43,7 +46,7 @@ function AdminHomePage() {
     <div className="col-sm-12 col-md-6 col-lg-3 AdminHomePage-card-box-2">
         <div className="AdminHomePage-inserted-card-box-2"> 
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
-            <Card.Img variant="top" src={hazardimage} className="AdminHomePage-inserted-card-box-image"/>
+            <Card.Img variant="top" src={hazardlocation} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
               <Card.Title className="AdminHomePage-inserted-card-box-title">Approve Hazard</Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
@@ -58,7 +61,7 @@ function AdminHomePage() {
     <div className="col-sm-12 col-md-6 col-lg-3 AdminHomePage-card-box-3">
         <div className="AdminHomePage-inserted-card-box-3"> 
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
-            <Card.Img variant="top" src={hazardimage} className="AdminHomePage-inserted-card-box-image"/>
+            <Card.Img variant="top" src={locomotivepilot} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
               <Card.Title className="AdminHomePage-inserted-card-box-title">Approve Hazard</Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
@@ -73,7 +76,7 @@ function AdminHomePage() {
     <div className="col-sm-12 col-md-6 col-lg-3 AdminHomePage-card-box-4">
         <div className="AdminHomePage-inserted-card-box-4"> 
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
-            <Card.Img variant="top" src={hazardimage} className="AdminHomePage-inserted-card-box-image"/>
+            <Card.Img variant="top" src={updatehazard} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
               <Card.Title className="AdminHomePage-inserted-card-box-title">Approve Hazard</Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">

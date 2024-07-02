@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./../style/LoginPage.css";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -18,7 +17,6 @@ function LoginPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [details, setDetails] = useState({ id: "", password: "" });
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
@@ -30,58 +28,60 @@ function LoginPage() {
     setDetails({ ...details, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      // Fetch user data from the database based on the selected option
-      const url =
-        selectedOption === "option1"
-          ? `http://localhost:4000/api/locomotivePilot/${details.id}`
-          : `http://localhost:4000/api/AdministrativeOfficer/${details.id}`;
+    // Dummy credentials
+    const dummyCredentials = {
+      option1: { id: "LID001", password: "password123" },
+      option2: { id: "AID001", password: "password123" },
+    };
 
-      console.log("Making request to:", url);
+    const { id, password } = details;
 
-      const userResponse = await axios.get(url);
+    if (!selectedOption) {
+      setError("Please select an option (Locomotive pilot or Admin).");
+      setShowErrorModal(true);
+      return;
+    }
 
-      const userData = userResponse.data;
+    // Check for empty fields
+    if (id.trim() === "") {
+      setError("ID field cannot be empty.");
+      setShowErrorModal(true);
+      return;
+    }
 
-      // Compare the user data with the details entered by the user
-      if (
-        (selectedOption === "option1"
-          ? userData.locomotivePilotID === details.id
-          : userData.AD_ID === details.id) &&
-        userData.password === details.password
-      ) {
-        // IDs and passwords match, proceed with login
-        console.log("Login successful");
+    if (password.trim() === "") {
+      setError("Password field cannot be empty.");
+      setShowErrorModal(true);
+      return;
+    }
 
-        setError(""); // Clear any previous errors
-        setSuccess(true); // Show success message
+    // Validate user input against dummy credentials
+    if (
+      selectedOption &&
+      dummyCredentials[selectedOption].id === id &&
+      dummyCredentials[selectedOption].password === password
+    ) {
+      // Login successful
+      setError(""); // Clear any previous errors
 
-        // Clear the form inputs
-        setDetails({ id: "", password: "" });
-
-        // Show success message and navigate to home page after 2 seconds
-        setTimeout(() => {
-          navigate("/homepage");
-        }, 2000);
-      } else {
-        // IDs or passwords do not match
-        setError("Invalid ID or password.");
-        setShowErrorModal(true);
-      }
-    } catch (error) {
-      console.error("Login failed:", error); // Log the error
-      setError(
-        error.response && error.response.data && error.response.data.error
-          ? error.response.data.error
-          : "Login failed. Please try again."
-      );
-      setShowErrorModal(true); // Show error modal
-    } finally {
-      // Always clear the form inputs
+      // Clear the form inputs
       setDetails({ id: "", password: "" });
+
+      /// Determine where to navigate based on selected option
+      if (selectedOption === "option1") {
+        // Navigate to home page for Locomotive pilot
+        navigate("/homepage");
+      } else if (selectedOption === "option2") {
+        // Navigate to admin home page
+        navigate("/adminhomepage");
+      }
+    } else {
+      // IDs or passwords do not match
+      setError("Invalid ID or password.");
+      setShowErrorModal(true);
     }
   };
 
@@ -91,7 +91,7 @@ function LoginPage() {
     <>
       <div className="container-flex vh-100">
         <div className="row vh-100">
-          {/* left side bar start */}
+          {/* Left side bar start */}
           <div className="LoginPage-main-left col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
             <div className="hazard-LoginPage-header-box container-flex">
               <div className="hazard-LoginPage-header-title">
@@ -112,10 +112,6 @@ function LoginPage() {
                   seamless navigation experience within the system.
                 </p>
               </div>
-            </div>
-
-            <div className="hazard-LoginPage-line-box container-flex">
-              {/* <div className="hazard-LoginPage-header-title">Sri Lanka Railway Safety System</div> */}
             </div>
 
             <div className="hazard-LoginPage-circle-box container-flex">
@@ -142,15 +138,11 @@ function LoginPage() {
               </div>
             </div>
           </div>
-          {/* left side bar end  */}
+          {/* Left side bar end */}
 
           <div className="LoginPage-main-right col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
             <div className="hazard-LoginPage-heading-box container-flex">
               <div className="hazard-LoginPage-heading-title">Login Form</div>
-            </div>
-
-            <div className="hazard-LoginPage-heading-line-box container-flex">
-              {/* <div className="hazard-LoginPage-header-title">Sri Lanka Railway Safety System</div> */}
             </div>
 
             {error && (
@@ -161,20 +153,6 @@ function LoginPage() {
                 <Modal.Body>{error}</Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleCloseErrorModal}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
-
-            {success && (
-              <Modal show={true} onHide={() => setSuccess(false)}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Success</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Login successful!</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => setSuccess(false)}>
                     Close
                   </Button>
                 </Modal.Footer>
