@@ -37,7 +37,7 @@ function HazardLocation() {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
-          const response = await axios.get('http://localhost:4000/api/location?locationType=${selectedLocationType}');
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
           const filteredNames = response.data
             .filter(location => location.locationType === selectedLocationType)
             .map(location => location.locationName);
@@ -68,7 +68,7 @@ function HazardLocation() {
   const handleSearch = async () => {
     try {
       if (selectedLocationName) {
-        const response = await axios.get('http://localhost:4000/api/hazard?locationName=${selectedLocationName}');
+        const response = await axios.get(`http://localhost:4000/api/hazard?locationName=${selectedLocationName}`);
         setLocationHazards(response.data); // Assuming the API returns an array of hazards
       }
     } catch (error) {
@@ -104,9 +104,11 @@ function HazardLocation() {
                     align="end"
                     className="hazard-location-dropdown-box-button"
                   >
-                    {locationTypes.map((type, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
-                    ))}
+                    <div className="hazard-location-scrollable-dropdown-menu">
+                      {locationTypes.map((type, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
+                      ))}
+                    </div>
                   </DropdownButton>
                 </InputGroup>
 
@@ -126,9 +128,11 @@ function HazardLocation() {
                     align="end"
                     className="hazard-location-dropdown-box-button"
                   >
-                    {locationNames.map((name, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
-                    ))}
+                    <div className="hazard-location-scrollable-dropdown-menu">
+                      {locationNames.map((name, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
+                      ))}
+                    </div>
                   </DropdownButton>
                 </InputGroup>
               </div>
