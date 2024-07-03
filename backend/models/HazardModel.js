@@ -14,7 +14,7 @@ const HazardSchema = new Schema(
         },
         time: {
             type: Date,
-            default: Date.now
+           
         },
         locationName: {
             type: String,
@@ -31,23 +31,23 @@ const HazardSchema = new Schema(
     }
 );
 
-// Pre-save hook to validate uniqueness of hazardType and hazardLocation
-HazardSchema.pre('save', async function(next) {
-    try {
-        const existingHazard = await this.constructor.findOne({
-            hazardType: this.hazardType,
-            hazardLocation: this.hazardLocation
-        });
+// // Pre-save hook to validate uniqueness of hazardType and hazardLocation
+// HazardSchema.pre('save', async function(next) {
+//     try {
+//         const existingHazard = await this.constructor.findOne({
+//             hazardType: this.hazardType,
+//             locationName: this.locationName
+//         });
 
-        if (existingHazard) {
-            throw new Error(`Hazard of type ${this.hazardType} already exists for location ${this.hazardLocation}`);
-        }
+//         if (existingHazard) {
+//             throw new Error(`Hazard of type ${this.hazardType} already exists for location ${this.locationName}`);
+//         }
 
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
+//         next();
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
 // Pre-save hook to customize hazard ID generation
 HazardSchema.pre('save', function(next) {

@@ -38,12 +38,37 @@ html {
   font-size: 1.2rem;
   font-weight: bolder;
 }
+
+.update-hazard-button-icon{
+  color: #e4f2e7;
+  font-size: 4vh;
+}
+
+/* Hide the default dropdown icon */
+.update-hazard-dropdown-box-button .dropdown-toggle::after {
+  display: none !important; /* Ensure the default icon is hidden */
+}
+
+/* Style the custom dropdown toggle */
+.custom-dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+/* Style the custom icon */
+.custom-dropdown-icon {
+  margin-left: 30px; /* Adjust the spacing as needed */
+}
+
 #update-hazard-input{
   border: .5vh solid #387373;
   font-size: 1.2rem;
   color: #387373;
   font-weight: bolder;
 }
+
+
+
 .update-hazard-input-dropdown-box{
   width: 100%;
   margin-top: 3%;
