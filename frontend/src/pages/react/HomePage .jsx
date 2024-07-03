@@ -36,9 +36,10 @@ function HomePage() {
                       >
                         {isGreen ? (
                           <div className="navigation-buttons container-flex">
-                            <button className="nav-button" onClick={() => navigate('/selectroute')}>Select Route</button>
+                            
                             <button className="nav-button" onClick={() => navigate('/updatehazard')}>Report Hazard</button>
                             <button className="nav-button" onClick={() => navigate('/hazardlocation')}>view hazard location</button>
+                            <button className="nav-button" onClick={() => navigate('/')}>Logout</button>
                           </div>
                         ) : (
                           isContentVisible && (

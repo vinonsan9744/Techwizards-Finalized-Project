@@ -18,6 +18,7 @@ import UpdateLPDetails from "./pages/react/UpdateLPDetails";
 import AdminHazardLocation from "./pages/react/AdminHazardLocation ";
 import UpdateHazard from "./pages/react/UpdateHazard";
 import ViewHazard from "./pages/react/ViewHazard ";
+import Checking from "./pages/react/Checking";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
   {
     path: "/viewhazard",
     element: <ViewHazard />,
+  },
+  {
+    path: "/check",
+    element: <Checking />,
   },
 ]);
 
