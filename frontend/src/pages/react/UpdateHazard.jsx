@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -27,15 +27,12 @@ function UpdateHazard() {
   const [selectedLocationName, setSelectedLocationName] = useState('');
   const [locationHazards, setLocationHazards] = useState([]);
   const [selectedHazard, setSelectedHazard] = useState('');
-
-
-
-
-  
   const toggleCalendar = () => setShowCalendar(!showCalendar);
 
+  const [timeoutId, setTimeoutId] = useState(null); // State to hold the timeout ID
+
   // Fetch location types on component mount
- {
+  useEffect(() => {
     const fetchLocationTypes = async () => {
       try {
         const response = await axios.get('http://localhost:4000/api/location');
@@ -47,10 +44,10 @@ function UpdateHazard() {
     };
 
     fetchLocationTypes();
-  }
+  }, []);
 
   // Fetch location names based on selected location type
-{
+  useEffect(() => {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
@@ -66,7 +63,15 @@ function UpdateHazard() {
     };
 
     fetchLocationNames();
-  }
+  }, [selectedLocationType]);
+
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      hazardType: selectedHazard,
+    }));
+  }, [selectedHazard]);
+
 
   // Handle selection of location type
   const handleLocationTypeSelect = (type) => {
@@ -79,8 +84,10 @@ function UpdateHazard() {
   // Handle selection of location name
   const handleLocationNameSelect = (name) => {
     setSelectedLocationName(name);
+    setFormData({ ...formData, locationName: name });
   };
 
+  
   // Fetch hazards for selected location on search button click
   const handleSearch = async () => {
     try {
@@ -121,6 +128,8 @@ function UpdateHazard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+
     try {
       const response = await axios.post('http://localhost:4000/api/hazard', formData);
       console.log(response.data); // Handle success response
@@ -133,6 +142,12 @@ function UpdateHazard() {
         description: ''
       }); // Clear the form inputs
 
+        // Set timeout to delete the data after 1 minute (60000 milliseconds)
+        const timeout = setTimeout(() => {
+          deleteData(response.data.id); // Assuming response.data.id is the identifier for the saved hazard
+        }, 60000); // 1 minute
+  
+        setTimeoutId(timeout); // Store the timeout ID in state
      
     } catch (error) {
       console.error('Hazard Repoting failed:', error); // Log the error
@@ -145,6 +160,16 @@ function UpdateHazard() {
       
     }
   };
+
+    // Function to delete data after timeout
+    const deleteData = async (id) => {
+      try {
+        await axios.delete(`http://localhost:4000/api/hazard/${id}`);
+        console.log(`Data with ID ${id} deleted.`);
+      } catch (error) {
+        console.error(`Error deleting data with ID ${id}:`, error);
+      }
+    };
 
   const handleCloseErrorModal = () => setShowErrorModal(false);
   return (
@@ -179,18 +204,19 @@ function UpdateHazard() {
           <MdDateRange />
         </Dropdown.Toggle>
         <Dropdown.Menu className="p-0 border-0">
-          <Datetime
-            onChange={(date) => {
-              setSelectedDate(date);
-              setShowCalendar(false);
-              {handleChange}
-            }}
-            input={false}
-            open={true}
-
-            value={formData.time}
-            
-          />
+        <Datetime
+  onChange={(date) => {
+    setSelectedDate(date);
+    setShowCalendar(false);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      time: date.format('YYYY-MM-DD HH:mm'),
+    }));
+  }}
+  input={false}
+  open={true}
+  value={formData.time}
+/>
         </Dropdown.Menu>
       </Dropdown>
     </InputGroup>
@@ -202,10 +228,9 @@ function UpdateHazard() {
           style={{ height: '5px' }}
           aria-label="Text input with dropdown button"
           id="update-hazard-input"
-          // value={selectedLocationType}
-          //           readOnly
-          value={formData.hazardType}
-                  onChange={handleChange}
+          value={selectedLocationType}
+                    readOnly
+         
           
         />
       </FloatingLabel>
@@ -229,10 +254,9 @@ function UpdateHazard() {
           style={{ height: '5px' }}
           aria-label="Text input with dropdown button"
           id="update-hazard-input"
-          // value={selectedLocationName}
-          //           readOnly
-          value={formData.locationName}
-                  onChange={handleChange}
+          value={selectedLocationName || formData.locationName}
+         
+          onChange={handleChange}
         />
       </FloatingLabel>
       <Dropdown align="end">
@@ -254,7 +278,9 @@ function UpdateHazard() {
           style={{ height: '5px' }}
           aria-label="Text input with dropdown button"
           id="update-hazard-input"
-          value={formData.hazardType}
+          
+          value={selectedHazard || formData.hazardType}
+         
           onChange={handleChange}
         />
       </FloatingLabel>
@@ -279,6 +305,9 @@ function UpdateHazard() {
           placeholder="Leave a comment here"
            id="update-hazard-input"
           style={{ height: '100px' }}
+          value={formData.description}
+          onChange={handleChange}
+          name="description"
         />
       </FloatingLabel>
             </InputGroup>
@@ -298,8 +327,11 @@ function UpdateHazard() {
           <div className="update-hazard-main-left col-sm-12 col-md-3 col-lg-3 col-xl-3">
 
             <div className="update-hazard-button-box">
-            <Button  type="submit" variant="outline-dark" className='update-hazard-button' >Submit</Button>{' '}
-            <Button variant="outline-dark" className='update-hazard-button' onClick={() => navigate('/homepage')}>Back</Button>{' '}
+              <Form onSubmit={handleSubmit}>
+              <Button  type="submit" variant="outline-dark" className='update-hazard-button' >Submit</Button>{' '}
+              <Button variant="outline-dark" className='update-hazard-button' onClick={() => navigate('/homepage')}>Back</Button>{' '}
+              </Form>
+            
             
             </div>
             
