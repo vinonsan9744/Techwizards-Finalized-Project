@@ -1,21 +1,21 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import "./../style/HazardLocation .css";
 import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaRoute } from "react-icons/fa";
+import { MdAddLocationAlt } from "react-icons/md";
 
 function HazardLocation() {
-  const navigate = useNavigate();
   const [locationTypes, setLocationTypes] = useState([]);
   const [selectedLocationType, setSelectedLocationType] = useState('');
   const [locationNames, setLocationNames] = useState([]);
   const [selectedLocationName, setSelectedLocationName] = useState('');
-  const [locationHazards, setLocationHazards] = useState([]);
+  const [hazards, setHazards] = useState([]);
 
   // Fetch location types on component mount
   useEffect(() => {
@@ -38,6 +38,7 @@ function HazardLocation() {
       try {
         if (selectedLocationType) {
           const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
+          // Filter location names based on selected location type
           const filteredNames = response.data
             .filter(location => location.locationType === selectedLocationType)
             .map(location => location.locationName);
@@ -51,12 +52,26 @@ function HazardLocation() {
     fetchLocationNames();
   }, [selectedLocationType]);
 
+  // Fetch hazards based on selected location name
+  useEffect(() => {
+    const fetchHazards = async () => {
+      try {
+        if (selectedLocationName) {
+          const response = await axios.get(`http://localhost:4000/api/hazard/locationName/${selectedLocationName}`);
+          setHazards(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching hazards:', error);
+      }
+    };
+
+    fetchHazards();
+  }, [selectedLocationName]);
+
   // Handle selection of location type
   const handleLocationTypeSelect = (type) => {
     setSelectedLocationType(type);
     setSelectedLocationName(''); // Reset selected location name when location type changes
-    setLocationNames([]); // Clear previous location names
-    setLocationHazards([]); // Clear previous location hazards
   };
 
   // Handle selection of location name
@@ -64,16 +79,11 @@ function HazardLocation() {
     setSelectedLocationName(name);
   };
 
-  // Fetch hazards for selected location on search button click
-  const handleSearch = async () => {
-    try {
-      if (selectedLocationName) {
-        const response = await axios.get(`http://localhost:4000/api/hazard?locationName=${selectedLocationName}`);
-        setLocationHazards(response.data); // Assuming the API returns an array of hazards
-      }
-    } catch (error) {
-      console.error('Error fetching location hazards:', error);
-    }
+  // Handle clear button click
+  const handleClear = () => {
+    setSelectedLocationType('');
+    setSelectedLocationName('');
+    setHazards([]);
   };
 
   return (
@@ -83,23 +93,22 @@ function HazardLocation() {
           {/* Left side box */}
           <div className="hazard-location-main-left col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="hazard-location-header-box container-flex w-100 vh-30">
-              <h1 className="hazard-location-header-title">View Hazard</h1>
+              <h1 className="hazard-location-header-title">Hazard Location</h1>
             </div>
 
-            <div className="hazard-location-dropdown-box container-flex">
-              <div>
                 {/* Dropdown for location types */}
-                <InputGroup className="hazard-location-input-dropdown-box ">
-                  <Form.Control
-                    aria-label="Text input with dropdown button"
-                    id="hazard-location-input"
-                    value={selectedLocationType}
-                    readOnly
-                  />
-
+                <InputGroup className="hazard-location-input-dropdown-box">
+                  <FloatingLabel controlId="floatingInputLocationName" label="Location Type" className="hazard-location-floating-label">
+                    <Form.Control
+                      aria-label="Text input with dropdown button"
+                      id="hazard-location-input"
+                      value={selectedLocationType}
+                      readOnly
+                    />
+                  </FloatingLabel>
                   <DropdownButton
                     variant="outline-secondary"
-                    title="Location Type"
+                    title={<FaRoute />}
                     id="hazard-location-input-group-dropdown-2"
                     align="end"
                     className="hazard-location-dropdown-box-button"
@@ -113,17 +122,18 @@ function HazardLocation() {
                 </InputGroup>
 
                 {/* Dropdown for location names */}
-                <InputGroup className="hazard-location-input-dropdown-box ">
-                  <Form.Control
-                    aria-label="Text input with dropdown button"
-                    id="hazard-location-input"
-                    value={selectedLocationName}
-                    readOnly
-                  />
-
+                <InputGroup className="hazard-location-input-dropdown-box">
+                  <FloatingLabel controlId="floatingInputLocationName" label="Location Name" className="hazard-location-floating-label">
+                    <Form.Control
+                      aria-label="Text input with dropdown button"
+                      id="hazard-location-input"
+                      value={selectedLocationName}
+                      readOnly
+                    />
+                  </FloatingLabel>
                   <DropdownButton
                     variant="outline-secondary"
-                    title="Location Name"
+                    title={<MdAddLocationAlt />}
                     id="hazard-location-input-group-dropdown-2"
                     align="end"
                     className="hazard-location-dropdown-box-button"
@@ -135,15 +145,13 @@ function HazardLocation() {
                     </div>
                   </DropdownButton>
                 </InputGroup>
-              </div>
-            </div>
 
             <div className="hazard-location-button-box1 container-flex vh-30">
-              <Button className="hazard-location-search-button" onClick={handleSearch}>Search</Button>
+              <Button className="hazard-location-search-button" onClick={handleClear}>Clear</Button>
             </div>
 
             <div className="hazard-location-button-box2 container-flex vh-30">
-              <Button className="hazard-location-back-button" onClick={() => navigate('/homepage')}>Back</Button>
+              <Button className="hazard-location-back-button">Back</Button>
             </div>
           </div>
 
@@ -159,17 +167,11 @@ function HazardLocation() {
                   <h2 className="hazard-location-possible-header-heading">Possible Hazards</h2>
                 </div>
 
-                {locationHazards.length > 0 ? (
-                  locationHazards.map((hazard, index) => (
-                    <div key={index} className="hazard-location-possible-content-box1 container-flex">
-                      <h2 className="hazard-location-possible-content-heading">{hazard.hazardType}</h2>
-                    </div>
-                  ))
-                ) : (
-                  <div className="hazard-location-possible-content-box1 container-flex">
-                    <h2 className="hazard-location-possible-content-heading">No hazards found for this location.</h2>
+                {hazards.map((hazard, index) => (
+                  <div key={index} className="hazard-location-possible-content-box1 container-flex">
+                    <h2 className="hazard-location-possible-content-heading">{hazard.hazardType}</h2>
                   </div>
-                )}
+                ))}
               </div>
             </div>
           </div>

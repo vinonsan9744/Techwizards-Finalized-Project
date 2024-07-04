@@ -35,5 +35,22 @@ const getSingleTask = async (req, res) => {
         res.status(400).json({ error: e.message });
     }
 };
+// Get hazard tasks by locationName
+const getTasksByLocationName = async (req, res) => {
+    const { locationName } = req.params;
 
-module.exports={createTask,getTasks,getSingleTask};
+    try {
+        const hazards = await HazardModel.find({ locationName: locationName });
+
+        if (!hazards || hazards.length === 0) {
+            return res.status(404).json({ error: 'No hazards found for this location' });
+        }
+
+        res.status(200).json(hazards);
+    } catch (error) {
+        console.error('Error fetching hazards:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports={createTask,getTasks,getSingleTask,getTasksByLocationName};
