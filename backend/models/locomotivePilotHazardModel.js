@@ -36,7 +36,12 @@ const locomotivePilotHazardSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
         expires: 30 // TTL index: documents expire 30 seconds after their creation
-    }
+    },
+    description: {
+        type: String,
+        
+    },
+
    
 });
 // Pre-save hook to customize hazard ID generation
