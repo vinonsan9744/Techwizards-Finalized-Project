@@ -21,7 +21,7 @@ const locomotivePilotHazardSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    HazardType: {
+    hazardType: {
         type: String,
         required: true,
         enum: ['Elephant', 'Bull', 'Landslide'] // corrected 'Potancial Hazard' to 'Potential Hazard'
@@ -46,11 +46,11 @@ locomotivePilotHazardSchema.pre('save', function(next) {
     }
 
     // Generate hazard ID based on the first two letters of the hazard type
-    const firstLetter = this.HazardType.charAt(0).toUpperCase();
-    const secondLetter = this.HazardType.charAt(1).toUpperCase();
+    const firstLetter = this.hazardType.charAt(0).toUpperCase();
+    const secondLetter = this.hazardType.charAt(1).toUpperCase();
     
     // Count the number of hazards of the same type
-    this.constructor.countDocuments({ HazardType: this.HazardType })
+    this.constructor.countDocuments({ hazardType: this.hazardType })
         .then(count => {
             const paddedCount = (count + 1).toString().padStart(3, '0');
             this.hazardID = `${firstLetter}${secondLetter}${paddedCount}`;

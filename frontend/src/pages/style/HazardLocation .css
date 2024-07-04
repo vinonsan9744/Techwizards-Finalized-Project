@@ -39,7 +39,7 @@ html {
 
 .hazard-location-dropdown-box {
   container: flex;
-  /* background-color: rgb(32, 131, 207); */
+  background-color: rgb(196, 196, 196);
   height: 40%;
   width: 80%;
   justify-content: flex-start;

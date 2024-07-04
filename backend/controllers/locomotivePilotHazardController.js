@@ -2,9 +2,9 @@ const locomotivePilotHazardModel = require ("../models/locomotivePilotHazardMode
 
 // to create a post method 
 const createTask = async(req,res)=>{
-    const {hazardID,locomotivePilotID,locationName,HazardType,time} =req.body;
+    const {hazardID,locomotivePilotID,locationName,hazardType,time} =req.body;
     try{
-        const locomotivePilotHazard=await locomotivePilotHazardModel.create({hazardID,locomotivePilotID,locationName,HazardType,time })
+        const locomotivePilotHazard=await locomotivePilotHazardModel.create({hazardID,locomotivePilotID,locationName,hazardType,time })
         res.status(200).json(locomotivePilotHazard)
     } catch(e){
         res.status(400).json({error: e.message});
