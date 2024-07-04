@@ -29,7 +29,7 @@ const locomotivePilotHazardSchema = new mongoose.Schema({
     },
     Time: {
         type: Date,
-        default: Date.now,
+        // default: Date.now,
         required:true
     },
     locomotivePilotEmail: {

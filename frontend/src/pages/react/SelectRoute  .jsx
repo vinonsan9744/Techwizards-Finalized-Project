@@ -35,7 +35,7 @@ function SelectRoute() {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
-          const response = await axios.get('http://localhost:4000/api/location?locationType=${selectedLocationType}');
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
           const filteredNames = response.data
             .filter(location => location.locationType === selectedLocationType)
             .map(location => location.locationName);
@@ -107,9 +107,11 @@ function SelectRoute() {
                     align="end"
                     className="select-route-dropdown-box-button"
                   >
-                    {locationTypes.map((type, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
-                    ))}
+                    <div className="select-route-scrollable-dropdown-menu">
+                      {locationTypes.map((type, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
+                      ))}
+                    </div>
                   </DropdownButton>
                 </InputGroup>
 
@@ -130,9 +132,11 @@ function SelectRoute() {
                     className="select-route-dropdown-box-button"
                     disabled={!selectedLocationType}
                   >
-                    {locationNames.map((name, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleStartLocationSelect(name)}>{name}</Dropdown.Item>
-                    ))}
+                    <div className="select-route-scrollable-dropdown-menu">
+                      {locationNames.map((name, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleStartLocationSelect(name)}>{name}</Dropdown.Item>
+                      ))}
+                    </div>
                   </DropdownButton>
                 </InputGroup>
 
@@ -153,9 +157,11 @@ function SelectRoute() {
                     className="select-route-dropdown-box-button"
                     disabled={!selectedLocationType}
                   >
-                    {locationNames.map((name, index) => (
-                      <Dropdown.Item key={index} onClick={() => handleEndLocationSelect(name)}>{name}</Dropdown.Item>
-                    ))}
+                    <div className="select-route-scrollable-dropdown-menu">
+                      {locationNames.map((name, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleEndLocationSelect(name)}>{name}</Dropdown.Item>
+                      ))}
+                    </div>
                   </DropdownButton>
                 </InputGroup>
               </div>
