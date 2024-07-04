@@ -13,7 +13,7 @@ html {
   height: 100%;
 }
 
-.hazard-location-header-box {
+.LP-hazard-location-header-box {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -22,10 +22,10 @@ html {
   width: 80%;
   border-bottom-right-radius: 200px;
   margin-left: -5%;
-  margin-bottom: 5%;
+  
 }
 
-.hazard-location-header-title {
+.LP-hazard-location-header-title {
   font-size: 8vh;
   text-align: left;
   font-weight: bolder;
@@ -33,28 +33,39 @@ html {
   color: #e4f2e7;
   margin-bottom: 5%;
   margin-top: 3%;
-
-
 }
 
-.hazard-location-dropdown-box {
-  container: flex;
-  background-color: rgb(196, 196, 196);
-  height: 40%;
-  width: 80%;
+.hazard-location-content-box{
+  background-color: #e3e9e9;
+  height: 50%;
+  width: 100%;
+  display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: 2%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-top: 2%;
 }
 
 .hazard-location-input-dropdown-box{
   width: 100%;
-  margin-left: 6%;
-  margin-right: 4%;
-  margin-top: 2%;
+  
 }
+
+/* Hide the default dropdown icon */
+.update-hazard-dropdown-box-button .dropdown-toggle::after {
+  display: none !important; /* Ensure the default icon is hidden */
+}
+
+/* Style the custom dropdown toggle */
+.custom-dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+/* Style the custom icon */
+.custom-dropdown-icon {
+  margin-left: 30px; /* Adjust the spacing as needed */
+}
+
 
 #hazard-location-input-group-dropdown-2{
   background-color: #387373;
@@ -63,7 +74,7 @@ html {
   font-weight: bolder;
 }
 
-.hazard-location-scrollable-dropdown-menu {
+.LP-hazard-location-scrollable-dropdown-menu {
   max-height: 200px; /* Adjust this value as needed */
   overflow-y: auto;
 }
@@ -77,59 +88,55 @@ html {
 }
 
 
-.hazard-location-button-box1 {
+.LP-hazard-location-button-box1 {
   /* background-color: rgb(165, 168, 168); */
   height: 10%;
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
+  width: 100%;
   margin-bottom: 5%;
   
 }
 
-.hazard-location-search-button {
+.LP-hazard-location-search-button {
 
   margin-left: 5%;
   margin-right: 5%;
   background-color: #387373;
   color: #e4f2e7;
-  width: 100%;
+  width: 40%;
   height: 100%;
   font-weight: bolder;
   font-size: 5vh;
-  border-radius: 6vh;
-
+  border-radius: 2vh;
+  border: #387373;
 }
 
-.hazard-location-search-button:hover {
+.LP-hazard-location-search-button:hover {
   background-color: #0a3030;
   
 }
 
-.hazard-location-button-box2 {
+.LP-hazard-location-button-box2 {
   /* background-color: rgb(165, 168, 168); */
   height: 10%;
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
+  width: 100%;
   margin-bottom: 10%;
 }
 
-.hazard-location-back-button {
+.LP-hazard-location-back-button {
 
   margin-left: 5%;
   margin-right: 5%;
   background-color: #387373;
   color: #e4f2e7;
-  width: 100%;
+  width: 40%;
   height: 100%;
   font-weight: bolder;
   font-size: 5vh;
-  border-radius: 6vh;
-  
+  border-radius: 2vh;
+  border: #387373;
 }
 
-.hazard-location-back-button:hover {
+.LP-hazard-location-back-button:hover {
   background-color: #0a3030;
   
 }

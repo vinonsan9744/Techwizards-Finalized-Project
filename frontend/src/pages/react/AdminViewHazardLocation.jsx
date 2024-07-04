@@ -12,7 +12,7 @@ import axios from 'axios';
 import { FaRoute } from "react-icons/fa";
 import { MdAddLocationAlt } from "react-icons/md";
 
-function HazardLocation() {
+function AdminViewHazardLocation() {
   const navigate = useNavigate();
   const [locationTypes, setLocationTypes] = useState([]);
   const [selectedLocationType, setSelectedLocationType] = useState('');
@@ -132,8 +132,6 @@ function HazardLocation() {
           aria-label="Text input with dropdown button"
           id="update-hazard-input"
           value={selectedLocationName }
-         
-          o
         />
       </FloatingLabel>
       <Dropdown align="end">
@@ -153,7 +151,7 @@ function HazardLocation() {
             </div>
 
             <div className="LP-hazard-location-button-box2 container-flex vh-30">
-              <Button variant="dark" className="LP-hazard-location-back-button" onClick={() => navigate('/homepage')}>Back</Button>
+              <Button variant="dark" className="LP-hazard-location-back-button" onClick={() => navigate('/adminhomepage')}>Back</Button>
             </div>
           </div>
 
@@ -183,4 +181,4 @@ function HazardLocation() {
   );
 }
 
-export default HazardLocation;
+export default AdminViewHazardLocation;

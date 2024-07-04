@@ -216,8 +216,6 @@ function UpdateHazard() {
           id="update-hazard-input"
           value={selectedLocationType}
                     readOnly
-         
-          
         />
       </FloatingLabel>
       <Dropdown align="end">
