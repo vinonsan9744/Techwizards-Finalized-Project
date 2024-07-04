@@ -49,6 +49,12 @@ html {
   font-size: 1.2rem;
   font-weight: bolder;
 }
+
+.select-route-scrollable-dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 #select-route-input{
   border: .5vh solid #387373;
   font-size: 1.2rem;
