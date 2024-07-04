@@ -1,12 +1,72 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import "./../style/AdminHazardLocation.css";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { FaRoute } from "react-icons/fa";
+import { MdAddLocationAlt } from "react-icons/md";
+import axios from 'axios';
 
 function AdminHazardLocation() {
   const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = React.useState('card'); // Using React.useState
+  const [locationTypes, setLocationTypes] = useState([]);
+  const [selectedLocationType, setSelectedLocationType] = useState('');
+  const [locationNames, setLocationNames] = useState([]);
+  const [selectedLocationName, setSelectedLocationName] = useState('');
+
+   // Fetch location types on component mount
+   useEffect(() => {
+    const fetchLocationTypes = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/location');
+        const uniqueTypes = [...new Set(response.data.map(location => location.locationType))];
+        setLocationTypes(uniqueTypes);
+      } catch (error) {
+        console.error('Error fetching location types:', error);
+      }
+    };
+
+    fetchLocationTypes();
+  }, []);
+
+  // Fetch location names based on selected location type
+  useEffect(() => {
+    const fetchLocationNames = async () => {
+      try {
+        if (selectedLocationType) {
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
+          const filteredNames = response.data
+            .filter(location => location.locationType === selectedLocationType)
+            .map(location => location.locationName);
+          setLocationNames(filteredNames);
+        }
+      } catch (error) {
+        console.error('Error fetching location names:', error);
+      }
+    };
+
+    fetchLocationNames();
+  }, [selectedLocationType]);
+
+    // Handle selection of location type
+    const handleLocationTypeSelect = (type) => {
+      setSelectedLocationType(type);
+      setSelectedLocationName(''); // Reset selected location name when location type changes
+      setLocationNames([]); // Clear previous location names
+      
+    };
+
+  // Handle selection of location name
+  const handleLocationNameSelect = (name) => {
+    setSelectedLocationName(name);
+  };
+
+
+  
 
   return (
     <>
@@ -20,15 +80,52 @@ function AdminHazardLocation() {
               <div className="admin-hazard-location-title">Hazards Locations</div>
             </div>
 
-            <div className="admin-hazard-location-left-heading-box container-flex ">
-              <input
-                type="text"
-                placeholder="Enter the location"
-                className="admin-hazard-location-location-textbox"
-              />
-            </div>
+           
+              <InputGroup className="update-hazard-input-dropdown-box">
+                <FloatingLabel controlId="floatingTextarea2" label="Select Route">
+                  <Form.Control
+                    placeholder="Leave a comment here"
+                    style={{ height: '5px' }}
+                    aria-label="Text input with dropdown button"
+                    id="update-hazard-input"
+                  value={selectedLocationType}
+                            readOnly
+                  />
+                </FloatingLabel>
+                <Dropdown align="end">
+                  <Dropdown.Toggle as={Button} variant="outline-secondary" id="update-hazard-input-group-dropdown-2" className="custom-dropdown-toggle">
+                    <FaRoute />
+                  </Dropdown.Toggle>
+                <Dropdown.Menu>
+                     {locationTypes.map((type, index) => (
+                         <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+                </Dropdown>
+              </InputGroup>
 
-
+              <InputGroup className="update-hazard-input-dropdown-box">
+                <FloatingLabel controlId="floatingTextarea2" label="Location">
+                  <Form.Control
+                    placeholder="Leave a comment here"
+                    style={{ height: '5px' }}
+                    aria-label="Text input with dropdown button"
+                    id="update-hazard-input"
+                    value={selectedLocationName}
+                            readOnly
+                  />
+                </FloatingLabel>
+                <Dropdown align="end">
+                  <Dropdown.Toggle as={Button} variant="outline-secondary" id="update-hazard-input-group-dropdown-2" className="custom-dropdown-toggle">
+                      <MdAddLocationAlt />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {locationNames.map((name, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
+                      ))}
+                  </Dropdown.Menu>
+                  </Dropdown>
+              </InputGroup>
 
             <div className="admin-hazard-location-left-radio-button-box container-flex ">
 
@@ -68,29 +165,19 @@ function AdminHazardLocation() {
                 />
                 <span className="admin-hazard-location-method-text">Landslide</span>
             </label>
-            <label className={`admin-hazard-location-method ${selectedMethod === 'bitcoin' ? 'selected' : ''}`}>
-                <input
-                    type="radio"
-                    name="payment"
-                    value="bitcoin"
-                    checked={selectedMethod === 'bitcoin'}
-                    onChange={() => setSelectedMethod('bitcoin')}
-                    className='admin-hazard-location-radio-button'
-
-                />
-                <span className="admin-hazard-location-method-text">Other</span>
-            </label>
         </div>
               
             </div>
 
-            <div className="admin-hazard-location-left-button-box1 container-flex">
-              <button className="admin-hazard-location-update-button">Update</button>
+            <div className="admin-hazard-location-button-box">
+              <div className="row">
+                <Button  className='admin-hazard-location-button' variant="dark">Update</Button>
+                <Button  className='admin-hazard-location-button' variant="dark">Back</Button>
+              </div>
+            
             </div>
 
-            <div className="admin-hazard-location-left-button-box2 container-flex">
-              <button className="admin-hazard-location-back-button" onClick={() => navigate('/adminhomepage')}>Back</button>
-            </div>
+            
           </div>
           {/* ..........left side box ended.......... */}
 

@@ -29,7 +29,6 @@ function UpdateHazard() {
   const [selectedHazard, setSelectedHazard] = useState('');
   const toggleCalendar = () => setShowCalendar(!showCalendar);
 
-  const [timeoutId, setTimeoutId] = useState(null); // State to hold the timeout ID
 
   // Fetch location types on component mount
   useEffect(() => {
@@ -110,7 +109,8 @@ function UpdateHazard() {
     time: '',
     hazardType: '',
     locationName: '',
-    description: ''
+    description: '',
+    locomotivePilotID:''
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -131,7 +131,7 @@ function UpdateHazard() {
     
 
     try {
-      const response = await axios.post('http://localhost:4000/api/hazard', formData);
+      const response = await axios.post('http://localhost:4000/api/locomotivePilotHazard', formData);
       console.log(response.data); // Handle success response
       setError(''); // Clear any previous errors
       setSuccess(true); // Show success message
@@ -139,15 +139,10 @@ function UpdateHazard() {
         time:'',
         hazardType: '',
         locationName: '',
-        description: ''
+        description: '',
+        locomotivePilotID:''
       }); // Clear the form inputs
 
-        // Set timeout to delete the data after 1 minute (60000 milliseconds)
-        const timeout = setTimeout(() => {
-          deleteData(response.data.id); // Assuming response.data.id is the identifier for the saved hazard
-        }, 60000); // 1 minute
-  
-        setTimeoutId(timeout); // Store the timeout ID in state
      
     } catch (error) {
       console.error('Hazard Repoting failed:', error); // Log the error
@@ -161,15 +156,6 @@ function UpdateHazard() {
     }
   };
 
-    // Function to delete data after timeout
-    const deleteData = async (id) => {
-      try {
-        await axios.delete(`http://localhost:4000/api/hazard/${id}`);
-        console.log(`Data with ID ${id} deleted.`);
-      } catch (error) {
-        console.error(`Error deleting data with ID ${id}:`, error);
-      }
-    };
 
   const handleCloseErrorModal = () => setShowErrorModal(false);
   return (
@@ -328,8 +314,24 @@ function UpdateHazard() {
 
             <div className="update-hazard-button-box">
               <Form onSubmit={handleSubmit}>
+              
+
+              <Form.Floating className="mb-3">
+                <Form.Control
+                  id="floatinglocomotivePilotID"
+                  type="locomotivePilotID"
+                  name="locomotivePilotID"
+                  placeholder="locomotivePilotID"
+                  value={formData.locomotivePilotID}
+                  onChange={handleChange}
+                  className="hazard-RegisterPage-input-text-box"
+                />
+                <label htmlFor="lpid">Locomotive pilot id</label>
+              </Form.Floating>
+
               <Button  type="submit" variant="outline-dark" className='update-hazard-button' >Submit</Button>{' '}
               <Button variant="outline-dark" className='update-hazard-button' onClick={() => navigate('/homepage')}>Back</Button>{' '}
+
               </Form>
             
             

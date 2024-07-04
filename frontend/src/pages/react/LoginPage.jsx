@@ -73,7 +73,7 @@ function LoginPage() {
       /// Determine where to navigate based on selected option
       if (selectedOption === "option1") {
         // Navigate to home page for Locomotive pilot
-        navigate("/homepage");
+        navigate("/selectroute");
       } else if (selectedOption === "option2") {
         // Navigate to admin home page
         navigate("/adminhomepage");
