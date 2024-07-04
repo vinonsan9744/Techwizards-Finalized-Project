@@ -111,9 +111,14 @@ html {
   border-top-left-radius: 4vh;
   border-top-right-radius: 4vh;
 }
-.AdminHomePage-inserted-card-box-title {
+.AdminHomePage-inserted-card-box-title h1{
   font-size: 4vh;
   font-weight: bolder;
+  color: #387373;
+}
+.AdminHomePage-inserted-card-box-text p{
+  font-size: 3vh;
+  font-weight: 500;
   color: #387373;
 }
 .AdminHomePage-inserted-card-box-text {
@@ -126,10 +131,12 @@ html {
   background-color: #387373;
   color: #e4f2e7;
   font-weight: bolder;
+  border: #387373;
 }
 
 .AdminHomePage-inserted-card-box-button:hover {
   background-color: #0f3838;
   color: #e4f2e7;
   font-weight: bolder;
+  border: #0f3838;
 }
