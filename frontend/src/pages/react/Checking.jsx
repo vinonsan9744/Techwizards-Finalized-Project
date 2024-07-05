@@ -87,7 +87,7 @@ function Checking() {
     const fetchLocationNames = async () => {
       try {
         if (selectedLocationType) {
-          const response = await axios.get('http://localhost:4000/api/location?locationType=${selectedLocationType}');
+          const response = await axios.get(`http://localhost:4000/api/location?locationType=${selectedLocationType}`);
           const filteredNames = response.data
             .filter(location => location.locationType === selectedLocationType)
             .map(location => location.locationName);
@@ -126,7 +126,7 @@ function Checking() {
     const fetchHazards = async () => {
       try {
         if (selectedLocationName) {
-          const response = await axios.get('http://localhost:4000/api/hazard/locationName/${selectedLocationName}');
+          const response = await axios.get(`http://localhost:4000/api/hazard/locationName/${selectedLocationName}`);
           setHazards(response.data);
         }
       } catch (error) {
@@ -193,7 +193,7 @@ function Checking() {
   </InputGroup>
 
               <div className="admin-hazard-location-payment-methods">
-                <label className={admin-hazard-location-method ${selectedMethod === 'Elephant' ? 'selected' : ''}}>
+                <label className={`admin-hazard-location-method ${selectedMethod === 'Elephant' ? 'selected' : ''}`}>
                   <input
                     type="radio"
                     name="hazardType"
@@ -204,7 +204,7 @@ function Checking() {
                   />
                   <span className="admin-hazard-location-method-text">Elephant</span>
                 </label>
-                <label className={admin-hazard-location-method ${selectedMethod === 'Bull' ? 'selected' : ''}}>
+                <label className={`admin-hazard-location-method ${selectedMethod === 'Bull' ? 'selected' : ''}`}>
                   <input
                     type="radio"
                     name="hazardType"
@@ -215,7 +215,7 @@ function Checking() {
                   />
                   <span className="admin-hazard-location-method-text">Bull</span>
                 </label>
-                <label className={admin-hazard-location-method ${selectedMethod === 'Landslide' ? 'selected' : ''}}>
+                <label className={`admin-hazard-location-method ${selectedMethod === 'Landslide' ? 'selected' : ''}`}>
                   <input
                     type="radio"
                     name="hazardType"
