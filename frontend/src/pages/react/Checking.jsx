@@ -1,32 +1,29 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import "./../style/RegisterPage.css";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GiElephant } from "react-icons/gi";
-import { MdLandslide } from "react-icons/md";
-import { FaTrainSubway } from "react-icons/fa6";
-import { FaCarSide } from "react-icons/fa";
-import { FaUserTie } from "react-icons/fa";
-import { FaCloudSunRain } from "react-icons/fa";
-import { FaMapLocationDot } from "react-icons/fa6";
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { FaRoute } from "react-icons/fa";
+import { MdAddLocationAlt } from "react-icons/md";
+import { GiHazardSign } from "react-icons/gi";
+import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
+import "./../style/UpdateHazard.css";
 
 function Checking() {
+  const navigate = useNavigate();
+  const [selectedMethod, setSelectedMethod] = useState('Elephant'); // Default selection for hazard type
+
   const [formData, setFormData] = useState({
-    time: '',
-    hazardType: '',
+    hazardType: 'Elephant', // Default selection for hazard type
     locationName: '',
-    description: ''
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
-  const navigate = useNavigate();
-
 
   const handleChange = (e) => {
     setFormData({
@@ -37,161 +34,237 @@ function Checking() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post('http://localhost:4000/api/hazard', formData);
-      console.log(response.data); // Handle success response
-      setError(''); // Clear any previous errors
-      setSuccess(true); // Show success message
+      console.log(response.data); // Log response data to verify if the data is saved correctly
+      setError('');
+      setSuccess(true);
       setFormData({
-        time:'',
-        hazardType: '',
+        hazardType: 'Elephant', // Reset to default selection
         locationName: '',
-        description: ''
-      }); // Clear the form inputs
-
-     
+      });
     } catch (error) {
-      console.error('Hazard Repoting failed:', error); // Log the error
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error); // Set error message from server response
-      } else {
-        setError('Hazard Repoting failed. Please try again.'); // Set a generic error message
-      }
-      setShowErrorModal(true); // Show error modal
-      
+      console.error('Hazard Reporting failed:', error);
+      setError(error.response?.data?.error || 'Hazard Reporting failed. Please try again.');
+      setShowErrorModal(true);
     }
   };
-
+  
   const handleCloseErrorModal = () => setShowErrorModal(false);
 
+  const handleRadioChange = (e) => {
+    const { value } = e.target;
+    setSelectedMethod(value);
+    setFormData({
+      ...formData,
+      hazardType: value
+    });
+  };
+
+  const [locationTypes, setLocationTypes] = useState([]);
+  const [selectedLocationType, setSelectedLocationType] = useState('');
+  const [locationNames, setLocationNames] = useState([]);
+  const [selectedLocationName, setSelectedLocationName] = useState('');
+  const [hazards, setHazards] = useState([]);
+
+  // Fetch location types on component mount
+  useEffect(() => {
+    const fetchLocationTypes = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/location');
+        const uniqueTypes = [...new Set(response.data.map(location => location.locationType))];
+        setLocationTypes(uniqueTypes);
+      } catch (error) {
+        console.error('Error fetching location types:', error);
+      }
+    };
+
+    fetchLocationTypes();
+  }, []);
+
+  // Fetch location names based on selected location type
+  useEffect(() => {
+    const fetchLocationNames = async () => {
+      try {
+        if (selectedLocationType) {
+          const response = await axios.get('http://localhost:4000/api/location?locationType=${selectedLocationType}');
+          const filteredNames = response.data
+            .filter(location => location.locationType === selectedLocationType)
+            .map(location => location.locationName);
+          setLocationNames(filteredNames);
+        }
+      } catch (error) {
+        console.error('Error fetching location names:', error);
+      }
+    };
+
+    fetchLocationNames();
+  }, [selectedLocationType]);
+
+  // Handle selection of location type
+  const handleLocationTypeSelect = (type) => {
+    setSelectedLocationType(type);
+    setSelectedLocationName(''); // Reset selected location name when location type changes
+    setFormData({
+      ...formData,
+      locationName: ''
+    });
+    setLocationNames([]); // Clear previous location names
+  };
+
+  // Handle selection of location name
+  const handleLocationNameSelect = (name) => {
+    setSelectedLocationName(name);
+    setFormData({
+      ...formData,
+      locationName: name
+    });
+  };
+
+  // Fetch hazards based on selected location name
+  useEffect(() => {
+    const fetchHazards = async () => {
+      try {
+        if (selectedLocationName) {
+          const response = await axios.get('http://localhost:4000/api/hazard/locationName/${selectedLocationName}');
+          setHazards(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching hazards:', error);
+      }
+    };
+
+    fetchHazards();
+  }, [selectedLocationName]);
+
   return (
-    <div>
+    <>
       <div className="container-flex vh-100">
         <div className="row vh-100">
-          {/* left side bar start */}
-          <div className="RegisterPage-main-left col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-            <div className="hazard-RegisterPage-header-box container-flex">
-              <div className="hazard-RegisterPage-header-title">Sri Lanka Railway Safety System</div>
-            </div>
-            <div className="hazard-RegisterPage-description-box container-flex">
-              <div className="hazard-RegisterPage-header-description"><p>The login process for our Railway Safety System is straightforward and secure. Locomotive pilots or admins simply input their email and password on the login page. The system then verifies these details, ensuring only authorized personnel gain access. Upon successful verification, users are redirected to the main home page, where they can access tailored options and settings designed to facilitate a seamless navigation experience within the system.</p></div>
-            </div>
-            <div className="hazard-RegisterPage-line-box container-flex"></div>
-            <div className="hazard-RegisterPage-circle-box container-flex">
-              <div className="hazard-RegisterPage-circle1 container-flex">
-                <GiElephant className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <MdLandslide className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <FaTrainSubway className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <FaCarSide className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <FaUserTie className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <FaCloudSunRain className="icon" />
-              </div>
-              <div className="hazard-RegisterPage-circle container-flex">
-                <FaMapLocationDot className="icon" />
-              </div>
-            </div>
+          <div className="update-hazard-header-box container-flex">
+            <div className="update-hazard-title">Report Hazard</div>
           </div>
-          {/* left side bar end */}
 
-          <div className="RegisterPage-main-right col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-            <div className="hazard-RegisterPage-heading-box container-flex">
-              <div className="hazard-RegisterPage-heading-title">Sign up Form</div>
-            </div>
-            <div className="hazard-RegisterPage-heading-line-box container-flex"></div>
-
+          <div className="update-hazard-main-left col-sm-12 col-md-9 col-lg-9 col-xl-9">
             <Form onSubmit={handleSubmit}>
+            <InputGroup className="update-hazard-input-dropdown-box">
+    <FloatingLabel controlId="floatingTextarea2" label="Select Route">
+      <Form.Control 
+        aria-label="Text input with dropdown button"
+        placeholder="Leave a comment here"
+        style={{ height: '5px' }}
+        id="update-hazard-input"
+        value={selectedLocationType}
+        onChange={(e) => setSelectedLocationType(e.target.value)} // Update state on input change
+      />
+    </FloatingLabel>
+    <Dropdown align="end">
+      <Dropdown.Toggle as={Button} variant="outline-secondary" id="update-hazard-input-group-dropdown-2" className="custom-dropdown-toggle">
+        <FaRoute />
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {locationTypes.map((type, index) => (
+          <Dropdown.Item key={index} onClick={() => handleLocationTypeSelect(type)}>{type}</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  </InputGroup>
 
-                
-            <Form.Floating className="mb-3">
-                <Form.Control
-                  id="hazardType"
-                  type="text"
-                  name="hazardType"
-                  placeholder="hazardType"
-                  value={formData.hazardType}
-                  onChange={handleChange}
-                  className="hazard-RegisterPage-input-text-box"
-                />
-                <label htmlFor="floatingEmail">hazardType</label>
-              </Form.Floating>
+  <InputGroup className="update-hazard-input-dropdown-box">
+    <FloatingLabel controlId="floatingTextarea2" label="Location">
+      <Form.Control
+        aria-label="Text input with dropdown button"
+        id="update-hazard-input"
+        name="locationName"
+        value={selectedLocationName}
+        onChange={(e) => setSelectedLocationName(e.target.value)} // Update state on input change
+      />
+    </FloatingLabel>
+    <Dropdown align="end">
+      <Dropdown.Toggle as={Button} variant="outline-secondary" id="update-hazard-input-group-dropdown-2" className="custom-dropdown-toggle">
+        <MdAddLocationAlt />
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {locationNames.map((name, index) => (
+          <Dropdown.Item key={index} onClick={() => handleLocationNameSelect(name)}>{name}</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  </InputGroup>
 
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  id="floatingEmail"
-                  type="text"
-                  name="locationName"
-                  placeholder="locationName"
-                  value={formData.locationName}
-                  onChange={handleChange}
-                  className="hazard-RegisterPage-input-text-box"
-                />
-                <label htmlFor="floatingEmail">locationName</label>
-              </Form.Floating>
-
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  id="floatingPhoneNo"
-                  type="text"
-                  name="description"
-                  placeholder="Phone Number"
-                  value={formData.description}
-                  onChange={handleChange}
-                  className="hazard-RegisterPage-input-text-box"
-                />
-                <label htmlFor="floatingPhoneNo">description</label>
-              </Form.Floating>
-              <div className="hazard-RegisterPage-login-button-box container-flex">
-                <Button type="submit" className="hazard-RegisterPage-login-button">Sign up</Button>
-              </div>
-              <div className="hazard-RegisterPage-register-button-box container-flex">
-                <Button className="hazard-RegisterPage-signup-button" onClick={() => navigate('/')}>Sign in</Button>
+              <div className="admin-hazard-location-payment-methods">
+                <label className={admin-hazard-location-method ${selectedMethod === 'Elephant' ? 'selected' : ''}}>
+                  <input
+                    type="radio"
+                    name="hazardType"
+                    value="Elephant"
+                    checked={selectedMethod === 'Elephant'}
+                    onChange={handleRadioChange}
+                    className='admin-hazard-location-radio-button'
+                  />
+                  <span className="admin-hazard-location-method-text">Elephant</span>
+                </label>
+                <label className={admin-hazard-location-method ${selectedMethod === 'Bull' ? 'selected' : ''}}>
+                  <input
+                    type="radio"
+                    name="hazardType"
+                    value="Bull"
+                    checked={selectedMethod === 'Bull'}
+                    onChange={handleRadioChange}
+                    className='admin-hazard-location-radio-button'
+                  />
+                  <span className="admin-hazard-location-method-text">Bull</span>
+                </label>
+                <label className={admin-hazard-location-method ${selectedMethod === 'Landslide' ? 'selected' : ''}}>
+                  <input
+                    type="radio"
+                    name="hazardType"
+                    value="Landslide"
+                    checked={selectedMethod === 'Landslide'}
+                    onChange={handleRadioChange}
+                    className='admin-hazard-location-radio-button'
+                  />
+                  <span className="admin-hazard-location-method-text">Landslide</span>
+                </label>
               </div>
             </Form>
-
-            {success && (
-              <Modal show={success} onHide={() => setSuccess(false)}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Success</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Hazard Reporting successfully!</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="success" onClick={() => setSuccess(false)}>Close</Button>
-                </Modal.Footer>
-              </Modal>
-            )}
-
-            {error && (
-              <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
-                <Modal.Header closeButton className="modal-header">
-                  <Modal.Title>Error</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="modal-body">{error}</Modal.Body>
-                <Modal.Footer className="modal-footer">
-                  <Button 
-                  variant="danger" 
-                  onClick={handleCloseErrorModal}
-                  className="modal-close-btn"
-                  >
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
           </div>
+
+          <div className="update-hazard-main-right col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div className="update-hazard-button-box">
+              <Form onSubmit={handleSubmit}>
+                <Button type="submit" variant="outline-dark" className="update-hazard-button">Submit</Button>{' '}
+                <Button variant="outline-dark" className="update-hazard-button" onClick={() => navigate('/homepage')}>Back</Button>{' '}
+              </Form>
+            </div>
+          </div>
+
+          {success && (
+            <Modal show={success} onHide={() => setSuccess(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Success</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Hazard Reporting successful!</Modal.Body>
+              <Modal.Footer>
+                <Button variant="success" onClick={() => setSuccess(false)}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+          )}
+
+          {error && (
+            <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
+              <Modal.Header closeButton>
+                <Modal.Title>Error</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>{error}</Modal.Body>
+              <Modal.Footer>
+                <Button variant="danger" onClick={handleCloseErrorModal}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
