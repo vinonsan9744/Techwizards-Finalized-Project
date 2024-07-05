@@ -19,6 +19,7 @@ import AdminHazardLocation from "./pages/react/AdminHazardLocation ";
 import UpdateHazard from "./pages/react/UpdateHazard";
 import ViewHazard from "./pages/react/ViewHazard ";
 import Checking from "./pages/react/Checking";
+import AdminViewHazardLocation from "./pages/react/AdminViewHazardLocation";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
   {
     path: "/viewhazard",
     element: <ViewHazard />,
+  },
+  {
+    path: "/adminviewhazardlocation",
+    element: <AdminViewHazardLocation />,
   },
   {
     path: "/check",

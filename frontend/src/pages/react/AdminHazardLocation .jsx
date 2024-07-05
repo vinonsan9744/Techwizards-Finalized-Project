@@ -17,6 +17,7 @@ function AdminHazardLocation() {
   const [selectedLocationType, setSelectedLocationType] = useState('');
   const [locationNames, setLocationNames] = useState([]);
   const [selectedLocationName, setSelectedLocationName] = useState('');
+  const [hazards, setHazards] = useState([]);
 
    // Fetch location types on component mount
    useEffect(() => {
@@ -65,7 +66,21 @@ function AdminHazardLocation() {
     setSelectedLocationName(name);
   };
 
+  // Fetch hazards based on selected location name
+  useEffect(() => {
+    const fetchHazards = async () => {
+      try {
+        if (selectedLocationName) {
+          const response = await axios.get(`http://localhost:4000/api/hazard/locationName/${selectedLocationName}`);
+          setHazards(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching hazards:', error);
+      }
+    };
 
+    fetchHazards();
+  }, [selectedLocationName]);
   
 
   return (
@@ -171,8 +186,8 @@ function AdminHazardLocation() {
 
             <div className="admin-hazard-location-button-box">
               <div className="row">
-                <Button  className='admin-hazard-location-button' variant="dark">Update</Button>
-                <Button  className='admin-hazard-location-button' variant="dark">Back</Button>
+                <Button  className='admin-hazard-location-button' variant="dark" >Update</Button>
+                <Button  className='admin-hazard-location-button' variant="dark" onClick={() => navigate('/adminhomepage')}>Back to Homepage</Button>
               </div>
             
             </div>
@@ -193,7 +208,7 @@ function AdminHazardLocation() {
             <div className="right-admin-hazard-location-header-box-line container-flex "></div>
 
             <div className="right-admin-hazard-location-location-box container-flex ">
-              <h2 className="right-admin-hazard-location-location-heading">Kekkirawa</h2>
+              <h2 className="right-admin-hazard-location-location-heading">{selectedLocationName}</h2>
             </div>
 
             <div className="right-admin-hazard-location-possible-hazards-main-box container-flex ">
@@ -202,21 +217,11 @@ function AdminHazardLocation() {
                   <h3 className="right-admin-hazard-location-possible-hazards-title">Possible Hazards</h3>
                 </div>
 
-                <div className="right-admin-hazard-location-possible-hazards-content-box container-flex">
-                  <h3 className="right-admin-hazard-location-possible-hazards-content">Elephant</h3>
-                </div>
-
-                <div className="right-admin-hazard-location-possible-hazards-content-box container-flex">
-                  <h3 className="right-admin-hazard-location-possible-hazards-content">Bull</h3>
-                </div>
-
-                <div className="right-admin-hazard-location-possible-hazards-content-box container-flex">
-                  <h3 className="right-admin-hazard-location-possible-hazards-content">Landslides</h3>
-                </div>
-
-                <div className="right-admin-hazard-location-possible-hazards-content-box container-flex">
-                  <h3 className="right-admin-hazard-location-possible-hazards-content">Other</h3>
-                </div>
+                {hazards.map((hazard, index) => (
+                  <div key={index} className="right-admin-hazard-location-possible-hazards-content-box container-flex">
+                    <h2 className="right-admin-hazard-location-possible-hazards-content">{hazard.hazardType}</h2>
+                  </div>
+                ))}
 
 
 
