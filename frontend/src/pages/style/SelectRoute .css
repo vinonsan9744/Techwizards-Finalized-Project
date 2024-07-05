@@ -32,7 +32,7 @@ html {
   justify-content: center;
 }
 
-.select-route-dropdown-box {
+/* .select-route-dropdown-box {
   background-color: rgb(207, 215, 221);
   height: 50%;
   width: 80%;
@@ -41,7 +41,7 @@ html {
   margin-bottom: 2%;
   margin-left: 10%;
   margin-right: 10%;
-}
+} */
 
 #select-route-input-group-dropdown-2{
   background-color: #387373;
@@ -63,7 +63,8 @@ html {
 }
 .select-route-input-dropdown-box{
   width: 100%;
-  margin-top: 10%;
+  margin-top: 6%;
+  margin-bottom: 6%;
 }
 .select-route-start-button-box {
   background-color: rgb(235, 237, 238);

@@ -21,5 +21,21 @@ const getTasks = async (req,res) => {
         res.status(400).jeson({ error:e.message});
     }
 };
+// GET method to retrieve first and last posted data for a specific locationType
+const getFirstLastPostedData = async (req, res) => {
+    const { locationType } = req.params; // Assuming locationType is passed as a parameter
 
-module.exports={createTask,getTasks};
+    try {
+        // Find the first posted data entry for the locationType
+        const firstPostedData = await LocationModel.findOne({ locationType }).sort({ createdAt: 1 });
+
+        // Find the last posted data entry for the locationType
+        const lastPostedData = await LocationModel.findOne({ locationType }).sort({ createdAt: -1 });
+
+        res.status(200).json({ firstPostedData, lastPostedData });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};
+
+module.exports={createTask,getTasks,getFirstLastPostedData};
