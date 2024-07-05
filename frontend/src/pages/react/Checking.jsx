@@ -176,8 +176,9 @@ function Checking() {
         aria-label="Text input with dropdown button"
         id="update-hazard-input"
         name="locationName"
-        value={selectedLocationName}
-        onChange={(e) => setSelectedLocationName(e.target.value)} // Update state on input change
+        value={selectedLocationName || formData.locationName}
+         
+          onChange={handleChange} // Update state on input change
       />
     </FloatingLabel>
     <Dropdown align="end">
