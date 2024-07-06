@@ -134,7 +134,7 @@ function ApproveHazard() {
             </InputGroup>
             <InputGroup className="ah-input-dropdown-box">
               <Form.Control
-                placeholder="Hazard"
+                // placeholder="Hazard"
                 style={{ height: '70px' , fontSize:'5vh' } }
                 aria-label="Text input with dropdown button"
                 id="ah-input"
