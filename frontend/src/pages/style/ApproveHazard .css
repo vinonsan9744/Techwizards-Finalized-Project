@@ -73,7 +73,20 @@ html {
   
 }
 
+.ApproveHazard-notification-button-box-icon{
+  background-color: #387373;
+  
 
+}
+
+.ApproveHazard-notification-button-box-icon:hover{
+  background-color: #0a4747;
+}
+
+.ApproveHazard-message-icon{
+  height: 4vh;
+  width: 4vh;
+}
 .ApproveHazard-newhazard-box {
     display: flex;
   justify-content: center;
@@ -340,4 +353,7 @@ font-size: 3vh;
     color: #387373;
     font-weight: bolder;
     font-size: 4vh;
+  }
+  .ApproveHazard-hazard-right-hazard-icon{
+    font-size: 5vh;
   }

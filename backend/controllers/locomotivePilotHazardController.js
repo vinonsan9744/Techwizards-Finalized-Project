@@ -24,4 +24,31 @@ const getTasks = async (req,res) => {
     }
 };
 
-module.exports={createTask,getTasks};
+// GET method to retrieve a task by hazardID
+const getTaskByHazardID = async (req, res) => {
+    const { hazardID } = req.params;
+    try {
+        const locomotivePilotHazard = await locomotivePilotHazardModel.findOne({ hazardID });
+        if (!locomotivePilotHazard) {
+            return res.status(404).json({ error: 'Hazard not found' });
+        }
+        res.status(200).json(locomotivePilotHazard);
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};
+
+// DELETE method to delete a task by hazardID
+const deleteTaskByHazardID = async (req, res) => {
+    const { hazardID } = req.params;
+    try {
+        const result = await locomotivePilotHazardModel.findOneAndDelete({ hazardID });
+        if (!result) {
+            return res.status(404).json({ error: 'Hazard not found' });
+        }
+        res.status(200).json({ message: 'Hazard deleted successfully', deletedHazard: result });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};
+module.exports={createTask,getTasks,getTaskByHazardID,deleteTaskByHazardID};
