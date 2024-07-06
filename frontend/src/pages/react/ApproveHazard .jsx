@@ -93,6 +93,7 @@ function ApproveHazard() {
                           </div>
                           <div className="ApproveHazard-hazard-middle-input-box">
                             <p>Anuradhapura</p>
+                            <h1>gfhfjyk  dsfgfhrtgjhhgnmmmmmmmmmmmmmmmmm </h1>
                           </div>
                           <div className="ApproveHazard-hazard-right-button-box">
                             <Button className="ApproveHazard-hazard-right-button" variant="outline-dark">Accept</Button>
