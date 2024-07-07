@@ -192,6 +192,7 @@ html {
     background-color: #e4f2e7;
     border: 0.5vh solid #387373;
     border-radius: 8px;
+   
 }
 
 .ApproveHazard-accept-box{
@@ -292,6 +293,18 @@ border:  solid #387373;
     margin-top: 1%;
     margin-bottom: 1%;
     /* background-color: aliceblue; */
+}
+/* Add custom styles for your modal components if needed */
+.modal-header .modal-title {
+  font-size: 1.5rem;
+}
+
+.modal-body button {
+  margin-bottom: 10px;
+}
+
+.modal-body p {
+  margin-bottom: 5px;
 }
 
 
