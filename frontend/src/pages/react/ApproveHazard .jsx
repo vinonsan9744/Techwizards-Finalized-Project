@@ -17,6 +17,8 @@ function ApproveHazard() {
   const [notifications, setNotifications] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null); // New state for selected notification
+  const [inputLocation, setInputLocation] = useState(''); // State for the location input value
+  const [inputHazard, setInputHazard] = useState(''); // State for the hazard input value
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +53,39 @@ function ApproveHazard() {
       .catch(error => {
         console.error('Error fetching hazard details:', error);
       });
+  };
+
+  const handleAcceptClick = (type, value) => {
+    if (type === 'hazard') {
+      setInputHazard(value); // Set the input value to the hazard type
+    } else if (type === 'location') {
+      setInputLocation(value); // Set the input value to the location name
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const monthIndex = date.getUTCMonth(); // Months are zero-based
+    const year = date.getUTCFullYear();
+    
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+    ];
+  
+    const month = monthNames[monthIndex];
+    
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero to minutes if needed
+    
+    const time = `${formattedHours}:${formattedMinutes} ${period}`;
+  
+    return { day, month, year, time };
   };
 
   return (
@@ -96,7 +131,12 @@ function ApproveHazard() {
                       </div>
                     </div>
                     <div className="ApproveHazard-description-box container-flex">
-                      <p>{selectedNotification && selectedNotification.description}</p>
+                      <p>
+                        {selectedNotification && (() => {
+                          const { day, month, year, time } = formatDate(selectedNotification.time);
+                          return `IN ${selectedNotification.locationName}, On ${day} ${month} ${year} at ${time}, ${selectedNotification.hazardType} hazard was reported`;
+                        })()}
+                      </p>
                     </div>
                     <div className="ApproveHazard-accept-box container-flex">
                       <div className="row">
@@ -105,11 +145,16 @@ function ApproveHazard() {
                             <GiElephant />
                           </div>
                           <div className="ApproveHazard-hazard-middle-input-box">
-                            <p> {selectedNotification && <p>{selectedNotification.hazardType}</p>}
-                            </p>
+                            <p>{selectedNotification && <p>{selectedNotification.hazardType}</p>}</p>
                           </div>
                           <div className="ApproveHazard-hazard-right-button-box">
-                            <Button className="ApproveHazard-hazard-right-button" variant="outline-dark">Accept</Button>
+                            <Button
+                              className="ApproveHazard-hazard-right-button"
+                              variant="outline-dark"
+                              onClick={() => handleAcceptClick('hazard', selectedNotification.hazardType)}
+                            >
+                              Accept
+                            </Button>
                           </div>
                         </div>
                         <div className="ApproveHazard-location-btn-box container-flex">
@@ -117,11 +162,16 @@ function ApproveHazard() {
                             <FaLocationDot />
                           </div>
                           <div className="ApproveHazard-hazard-middle-input-box">
-                            <p>{selectedNotification && <p>{selectedNotification.locationName}</p>}
-                            </p>
+                            <p>{selectedNotification && <p>{selectedNotification.locationName}</p>}</p>
                           </div>
                           <div className="ApproveHazard-hazard-right-button-box">
-                            <Button className="ApproveHazard-hazard-right-button" variant="outline-dark">Accept</Button>
+                            <Button
+                              className="ApproveHazard-hazard-right-button"
+                              variant="outline-dark"
+                              onClick={() => handleAcceptClick('location', selectedNotification.locationName)}
+                            >
+                              Accept
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -139,9 +189,11 @@ function ApproveHazard() {
             <InputGroup className="ah-input-dropdown-box mb-5">
               <Form.Control
                 placeholder="Location"
-                style={{ height: '70px', fontSize: '5vh' }}
+                value={inputLocation} // Bind the location input value state
+                onChange={(e) => setInputLocation(e.target.value)} // Update the state on change
+                style={{ height: '70px', fontSize: '5vh', color: 'red', fontWeight: 'bolder' }}
                 aria-label="Text input with dropdown button"
-                id="ah-input"
+                id="ah-input-location"
               />
               <Button
                 variant="outline-secondary"
@@ -158,9 +210,11 @@ function ApproveHazard() {
             <InputGroup className="ah-input-dropdown-box">
               <Form.Control
                 placeholder="Hazard"
-                style={{ height: '70px', fontSize: '5vh' }}
+                value={inputHazard} // Bind the hazard input value state
+                onChange={(e) => setInputHazard(e.target.value)} // Update the state on change
+                style={{ height: '70px', fontSize: '5vh', color: 'red', fontWeight: 'bolder' }}
                 aria-label="Text input with dropdown button"
-                id="ah-input"
+                id="ah-input-hazard"
               />
               <Button
                 variant="outline-secondary"
@@ -197,28 +251,19 @@ function ApproveHazard() {
                 Back
               </Button>
             </div>
-            <div className="ah-box button-box container-flex">
-              <Button
-                variant="outline-dark"
-                className="ah-button"
-                onClick={() => navigate('/adminhomepage')}
-              >
-                Back
-              </Button>
-            </div>
           </div>
         </div>
       </div>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Messages</Modal.Title>
+          <Modal.Title>Hazard Reports</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '200px', overflowY: 'auto' }}>
           {notifications.map((notification, index) => (
             <div key={index} className="notification-item">
-              <p>{`message${index + 1}`}</p>
-              <Button variant="outline-secondary" onClick={() => markAsRead(notification.hazardID)}>
-                Mark As Read
+              <p>{`Hazard Reporting${index + 1}`}</p>
+              <Button variant="outline-success" onClick={() => markAsRead(notification.hazardID)}>
+                View Report
               </Button>
             </div>
           ))}
