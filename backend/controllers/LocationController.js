@@ -38,4 +38,23 @@ const getFirstLastPostedData = async (req, res) => {
     }
 };
 
-module.exports={createTask,getTasks,getFirstLastPostedData};
+// Get hazard tasks by locationName
+const getTasksByLocationName = async (req, res) => {
+    const { locationName } = req.params;
+
+    try {
+        const location = await LocationModel.find({ locationName: locationName });
+
+        if (!location || location.length === 0) {
+            return res.status(404).json({ error: 'No datas found for this location' });
+        }
+
+        res.status(200).json(location);
+    } catch (error) {
+        console.error('Error fetching location:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+module.exports={createTask,getTasks,getFirstLastPostedData,getTasksByLocationName};
