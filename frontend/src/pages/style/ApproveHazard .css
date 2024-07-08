@@ -101,7 +101,12 @@ html {
   background-color: #387373;
 }
 
-
+.ApproveHazard-description-box p{
+  color: rgb(163, 1, 1);
+  font-weight: bolder;
+  text-align: justify;
+  font-size: 5vh;
+}
 
 .ApproveHazard-newhazard-content-box{
     display: flex;

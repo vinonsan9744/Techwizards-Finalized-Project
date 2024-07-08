@@ -35,7 +35,7 @@ const locomotivePilotHazardSchema = new mongoose.Schema({
     createdAt: { // Field to store the document creation time
         type: Date,
         default: Date.now,
-        expires: 1800 // TTL index: documents expire 30 seconds after their creation
+        expires: 18000 // TTL index: documents expire 30 seconds after their creation
     },
     description: {
         type: String,
