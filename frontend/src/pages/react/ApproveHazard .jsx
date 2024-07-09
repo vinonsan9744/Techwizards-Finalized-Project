@@ -265,6 +265,7 @@ function ApproveHazard() {
                 variant="outline-dark"
                 className="ah-button"
                 type="submit"
+
               >
                 Approve
               </Button>
