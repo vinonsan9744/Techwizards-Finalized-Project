@@ -222,7 +222,7 @@ function UpdateLPDetails() {
         </div>
       </div>
 
-      // Inside your JSX return statement in UpdateLPDetails component
+      {/* // Inside your JSX return statement in UpdateLPDetails component */}
 
 <Modal show={showModal} onHide={() => setShowModal(false)} centered>
   <Modal.Header closeButton>

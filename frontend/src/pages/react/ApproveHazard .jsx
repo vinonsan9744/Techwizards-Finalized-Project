@@ -22,6 +22,9 @@ function ApproveHazard() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [pilotName, setPilotName] = useState('');
+  const [pilotPhone, setPilotPhone] = useState('');
+  const [locationHazards, setLocationHazards] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,22 +46,33 @@ function ApproveHazard() {
     setShowModal(false);
   };
 
-  const markAsRead = (hazardId) => {
-    axios.get(`http://localhost:4000/api/locomotivePilotHazard/hazardID/${hazardId}`)
-      .then(response => {
-        setSelectedNotification(response.data);
-        setShowModal(false);
-      })
-      .catch(error => {
-        console.error('Error fetching hazard details:', error);
-      });
+  const markAsRead = async (hazardId, locomotivePilotID) => {
+    try {
+      const hazardResponse = await axios.get(`http://localhost:4000/api/locomotivePilotHazard/hazardID/${hazardId}`);
+      setSelectedNotification(hazardResponse.data);
+      setShowModal(false);
+
+      // Fetch locomotive pilot details using locomotivePilotID
+      const pilotResponse = await axios.get(`http://localhost:4000/api/locomotivePilot/${locomotivePilotID}`);
+      setPilotName(pilotResponse.data.name);
+      setPilotPhone(pilotResponse.data.phone);
+    } catch (error) {
+      console.error('Error fetching hazard or pilot details:', error);
+    }
   };
 
-  const handleAcceptClick = (type, value) => {
+  const handleAcceptClick = async (type, value) => {
     if (type === 'hazard') {
       setInputHazard(value);
     } else if (type === 'location') {
       setInputLocation(value);
+      // Fetch hazards for the selected location
+      try {
+        const response = await axios.get(`http://localhost:4000/api/hazard/locationName/${value}`);
+        setLocationHazards(response.data);
+      } catch (error) {
+        console.error('Error fetching hazards:', error);
+      }
     }
   };
 
@@ -145,13 +159,12 @@ function ApproveHazard() {
                   <div className="row">
                     <div className="ApproveHazard-detail-box container-flex">
                       <div className="ApproveHazard-detail-name-box container-flex">
-                        <p>{selectedNotification && (() => {
-                          
-                          return `NAME :  ${selectedNotification.locomotivePilotID}`;
-                        })()}</p>
+                        <p>ID :</p>
+                        <p>{selectedNotification && ` : ${selectedNotification.locomotivePilotID}`}</p>
                       </div>
-                      <div className="ApproveHazard-detail-loco-phone-box  container-flex">
+                      <div className="ApproveHazard-detail-loco-phone-box container-flex">
                         <p>LP Phone:</p>
+                        <p>{pilotPhone}</p>
                       </div>
                       <div className="ApproveHazard-detail-station-phone-box container-flex">
                         <p>Station Phone:</p>
@@ -172,7 +185,7 @@ function ApproveHazard() {
                             <GiElephant />
                           </div>
                           <div className="ApproveHazard-hazard-middle-input-box">
-                            <p>{selectedNotification && <p>{selectedNotification.hazardType}</p>}</p>
+                            <p>{selectedNotification && selectedNotification.hazardType}</p>
                           </div>
                           <div className="ApproveHazard-hazard-right-button-box">
                             <Button
@@ -189,7 +202,7 @@ function ApproveHazard() {
                             <FaLocationDot />
                           </div>
                           <div className="ApproveHazard-hazard-middle-input-box">
-                            <p>{selectedNotification && <p>{selectedNotification.locationName}</p>}</p>
+                            <p>{selectedNotification && selectedNotification.locationName}</p>
                           </div>
                           <div className="ApproveHazard-hazard-right-button-box">
                             <Button
@@ -213,7 +226,7 @@ function ApproveHazard() {
               <h1>Approval Hazard</h1>
             </div>
             <Form onSubmit={handleSubmit}>
-              <InputGroup className="ah-input-dropdown-box mb-5">
+              <InputGroup className="ah-input-dropdown-box ">
                 <Form.Control
                   placeholder="Location"
                   value={inputLocation}
@@ -235,7 +248,18 @@ function ApproveHazard() {
                   </div>
                 </Button>
               </InputGroup>
-              <InputGroup className="ah-input-dropdown-box">
+
+              <div className="ApproveHazard-hazard-icon-box2 container-flex">
+                {locationHazards.map((hazard, index) => (
+                  <div key={index} className="ApproveHazard-hazard-content container-flex">
+                    <h2 className="ApproveHazard-hazard-icon">{hazard.hazardType}</h2>
+                  </div>
+                ))}
+              </div>
+
+             
+
+              <InputGroup className="ah-input-dropdown-box ">
                 <Form.Control
                   placeholder="Hazard"
                   value={inputHazard}
@@ -259,29 +283,27 @@ function ApproveHazard() {
               </InputGroup>
             </Form>
 
-              <form onSubmit={handleSubmit}>
-                <div className="ah-box button-box container-flex">
-              <Button
-                variant="outline-dark"
-                className="ah-button"
-                type="submit"
+            <form onSubmit={handleSubmit}>
+              <div className="ah-box button-box container-flex">
+                <Button
+                  variant="outline-dark"
+                  className="ah-button"
+                  type="submit"
+                >
+                  Approve
+                </Button>
+              </div>
 
-              >
-                Approve
-              </Button>
-            </div>
-
-            <div className="ah-box button-box container-flex">
-              <Button
-                variant="outline-dark"
-                className="ah-button"
-                
-              >
-                Decline
-              </Button>
-            </div>
-              </form>
-            
+              <div className="ah-box button-box container-flex">
+                <Button
+                  variant="outline-dark"
+                  className="ah-button"
+                  
+                >
+                  Decline
+                </Button>
+              </div>
+            </form>
 
             <div className="ah-box button-box container-flex">
               <Button
@@ -292,41 +314,37 @@ function ApproveHazard() {
                 Back
               </Button>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
 
       {successMessage && (
-              <Modal show={true} onHide={() => setSuccessMessage('')}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Success</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{successMessage}</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="success" onClick={() => setSuccessMessage('')}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
+        <Modal show={true} onHide={() => setSuccessMessage('')}>
+          <Modal.Header closeButton>
+            <Modal.Title>Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{successMessage}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" onClick={() => setSuccessMessage('')}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
 
-            {errorMessage && (
-              <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Error</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{errorMessage}</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="danger" onClick={handleCloseErrorModal}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
+      {errorMessage && (
+        <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Error</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{errorMessage}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleCloseErrorModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -335,8 +353,8 @@ function ApproveHazard() {
         <Modal.Body style={{ maxHeight: '200px', overflowY: 'auto' }}>
           {notifications.map((notification, index) => (
             <div key={index} className="notification-item">
-              <p>{`Hazard Reporting${index + 1}`}</p>
-              <Button variant="outline-success" onClick={() => markAsRead(notification.hazardID)}>
+              <p>{`Hazard Reporting ${index + 1}`}</p>
+              <Button variant="outline-success" onClick={() => markAsRead(notification.hazardID, notification.locomotivePilotID)}>
                 View Report
               </Button>
             </div>
