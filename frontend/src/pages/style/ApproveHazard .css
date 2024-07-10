@@ -138,8 +138,8 @@ html {
 }
 
 .ApproveHazard-detail-name-box{
-  background-color: #787a7c;
-  width: 20%;
+  /* background-color: #787a7c; */
+  width: 30%;
   height: 100%;
   margin-right: 2%;
   justify-content: flex-start;
@@ -157,8 +157,8 @@ html {
 
 
 .ApproveHazard-detail-loco-phone-box {
-  background-color: #104e8b;
-  width: 40%;
+  /* background-color: #104e8b; */
+  width: 28%;
   height: 100%;
   margin-right: 2%;
   justify-content: flex-start;
@@ -169,12 +169,13 @@ html {
   color: #387373;
   text-align: center;
   font-weight: bolder;
-  padding-top: 10%;
   font-size: 2vh;
+  margin-top: 20%;
+  margin-bottom: 20%;
 }
 
 .ApproveHazard-detail-station-phone-box {
-  background-color: #53db14;
+  /* background-color: #53db14; */
   width: 40%;
   height: 100%;
   justify-content: flex-start;
@@ -185,8 +186,9 @@ html {
   color: #387373;
   text-align: center;
   font-weight: bolder;
-  padding-top: 10%;
   font-size: 2vh;
+  margin-top: 20%;
+  margin-bottom: 20%;
 }
 
 .ApproveHazard-description-box{
@@ -391,8 +393,11 @@ font-size: 3vh;
 }
   .ApproveHazard-hazard-icon-box2 h2{
    color: #e4f2e7;
-   background-color: red;
-   margin: 10%;
+   background-color: rgb(95, 25, 25);
+   height: 80%;
+   margin-top: 10%;
+   margin-bottom: 10%;
+   text-align: center;
   }
 
   .ApproveHazard-hazard-content{

@@ -159,15 +159,17 @@ function ApproveHazard() {
                   <div className="row">
                     <div className="ApproveHazard-detail-box container-flex">
                       <div className="ApproveHazard-detail-name-box container-flex">
-                        <p>ID :</p>
-                        <p>{selectedNotification && ` : ${selectedNotification.locomotivePilotID}`}</p>
+                        <p>Name:</p>
+                        <p>{selectedNotification && `${selectedNotification.locomotivePilotName}`}</p>
                       </div>
                       <div className="ApproveHazard-detail-loco-phone-box container-flex">
-                        <p>LP Phone:</p>
-                        <p>{pilotPhone}</p>
+                      <p>LP Phone No:</p>
+                      <p>{selectedNotification && `${selectedNotification.locomotivePilotPhoneNo}`}</p>
+                       
                       </div>
                       <div className="ApproveHazard-detail-station-phone-box container-flex">
-                        <p>Station Phone:</p>
+                      <p>Station Phone No:</p>
+                      <p>{selectedNotification && `${selectedNotification.locomotivePilotPhoneNo}`}</p>
                       </div>
                     </div>
                     <div className="ApproveHazard-description-box container-flex">
