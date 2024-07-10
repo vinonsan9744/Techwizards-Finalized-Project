@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const LocationModel = require ("../models/LocationModel");
 
 // to create a post method 
