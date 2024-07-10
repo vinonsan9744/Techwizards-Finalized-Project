@@ -125,9 +125,11 @@ html {
   font-size: 20px;
   font-weight: bolder;
   color: #387373;
+  text-align: justify;
 }
 
 .AdminHomePage-inserted-card-box-button {
+  width: 100%;
   background-color: #387373;
   color: #e4f2e7;
   font-weight: bolder;

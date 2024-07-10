@@ -48,12 +48,12 @@ function AdminHomePage() {
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
             <Card.Img variant="top" src={hazardlocation} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
-              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>Approve Hazard</h1></Card.Title>
+              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>View Hazard</h1></Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
               <p>The administrative officer can update hazards here, which
               locomotive pilot fails to report.</p>
             </Card.Text>
-              <Button variant="dark" className="AdminHomePage-inserted-card-box-button"onClick={() => navigate('/adminviewhazardlocation')}>Hazard Location</Button>
+              <Button variant="dark" className="AdminHomePage-inserted-card-box-button"onClick={() => navigate('/adminviewhazardlocation')}>View Hazard Location</Button>
            </Card.Body>
           </Card>
         </div>
@@ -61,12 +61,12 @@ function AdminHomePage() {
     <div className="col-sm-12 col-md-6 col-lg-3 AdminHomePage-card-box-3">
         <div className="AdminHomePage-inserted-card-box-3"> 
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
-            <Card.Img variant="top" src={locomotivepilot} className="AdminHomePage-inserted-card-box-image"/>
+            <Card.Img  variant="top" src={locomotivepilot} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
-              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>Approve Hazard</h1></Card.Title>
+              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>Locomotive Pilot</h1></Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
               <p>Administrative officers can use this interface to update
-              locomotive pilot details.</p>
+              locomotive pilot details and add details</p>
             </Card.Text>
               <Button variant="dark" className="AdminHomePage-inserted-card-box-button" onClick={() => navigate('/updatelpdetails')}>Locomotive pilot </Button>
            </Card.Body>
@@ -78,7 +78,7 @@ function AdminHomePage() {
         <Card style={{ width: '100%',height:'100%',borderWidth:5,}} className="AdminHomePage-inserted-card">
             <Card.Img variant="top" src={updatehazard} className="AdminHomePage-inserted-card-box-image"/>
               <Card.Body>
-              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>Approve Hazard</h1></Card.Title>
+              <Card.Title className="AdminHomePage-inserted-card-box-title"><h1>Update Hazard</h1></Card.Title>
               <Card.Text className="AdminHomePage-inserted-card-box-text">
               <p>Admin can approve and update hazards which is reported by
               locomotive pilots.</p>
